@@ -1,0 +1,121 @@
+{% extends 'admin/layouts/base.twig' %}
+{% block css %}
+<link rel="stylesheet" href="{{ base_url() }}assets/admin/css/dataTables.bootstrap.min.css">
+{% endblock %}
+{% block javascript %}
+<script src="{{ base_url() }}assets/admin/js/jquery.dataTables.min.js"></script>
+<script src="{{ base_url() }}assets/admin/js/dataTables.bootstrap.min.js"></script>
+<script>
+  $(function () {
+    $('#example1').DataTable()
+  })
+  $(document).on("click", ".deleteCategory", function (e) {
+
+    e.preventDefault();
+
+    var _self = $(this);
+    var baseUrl = "{{base_url()}}";
+
+    var categoryId = _self.data('id');
+    $("#deleteBtn").attr("href",baseUrl + "admin/category/delete/" + categoryId);
+
+    $(_self.attr('href')).modal('show');
+  });
+</script>
+{% endblock %}
+{% block content %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Quản lý danh mục
+        <small>advanced tables</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="/admin/category/index">Danh mục</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header">
+            <div class="box-title">Category</div>
+          </div>
+          <div class="box-body">
+            <button class="btn btn-primary">Thêm category</button>
+            <button class="btn btn-danger">Xóa category</button>
+            <form action="{{ url("admin/category/create") }}" method="post">
+              <div class="form-group">
+                <label for="category_name">Tên category *</label>
+                <input type="text" class="form-control" name="category_name" id="category_name" placeholder="Nhập category name" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+          </div>
+        </div>
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Danh mục</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>tên danh mục</th>
+                  <th>slug</th>
+                  <th>Hành động</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for category in categories %}
+                <tr>
+                  <td>{{ category.id }}</td>
+                  <td>{{ category.name }}</td>
+                  <td>{{ category.slug }}</td>
+                  <td>
+                    <div>
+                      <a href="{{base_url()}}admin/category/view/{{category.id}}" class="btn btn-primary btn-xs">Xem</a>
+                      <a href="{{base_url()}}admin/category/edit/{{category.id}}" class="btn btn-warning btn-xs">Sửa</a>
+                      <a href="javascript:void(0)" class="deleteCategory btn btn-danger btn-xs" data-id="{{category.id}}" data-toggle="modal" data-target="#modal-delete">Xóa</a>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+    <div class="modal modal-danger fade in" id="modal-delete">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Xóa mục này</h4>
+              </div>
+              <div class="modal-body">
+                <p>Bạn chắc chắn muốn xóa mục này ?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Đóng</button>
+                <a id="deleteBtn" href="#" class="btn btn-outline">Xóa</a>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+{% endblock %}

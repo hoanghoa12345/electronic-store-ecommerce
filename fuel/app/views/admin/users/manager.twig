@@ -1,0 +1,91 @@
+{% extends 'admin/layouts/base.twig' %}
+{% block css %}
+<link rel="stylesheet" href="{{ base_url() }}assets/admin/css/dataTables.bootstrap.min.css">
+{% endblock %}
+{% block javascript %}
+<script src="{{ base_url() }}assets/admin/js/jquery.dataTables.min.js"></script>
+<script src="{{ base_url() }}assets/admin/js/dataTables.bootstrap.min.js"></script>
+<script>
+  $(function () {
+    $('#example1').DataTable()
+  })
+</script>
+{% endblock %}
+{% block content %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Quản lý người dùng
+        <small>advanced tables</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/admin/users">Người dùng</a></li>
+        <li class="/admin/users/index">Thông tin</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header">
+            <div class="box-title">Thêm người dùng</div>
+          </div>
+          <div class="box-body">
+            <button class="btn btn-primary">Thêm người dùng</button>
+            <button class="btn btn-danger">Xóa người dùng</button>
+          </div>
+        </div>
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Thông tin người dùng</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>username</th>
+                  <th>email</th>
+                  <th>họ</th>
+                  <th>tên</th>
+                  <th>ngày tham gia</th>
+                  <th>Vai trò</th>
+                  <th>Ảnh đại diện</th>
+                  <th>Hành động</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>hoanghoa</td>
+                  <td>hoanghoa12@gmail.com</td>
+                  <td>Hoàng</td>
+                  <td>Hòa</td>
+                  <td>25/12/2020</td>
+                  <td>admin</td>
+                  <td>image.jpg</td>
+                  <td>
+                    <div>
+                      <a href="" class="btn btn-primary btn-xs">Xem</a>
+                      <a href="" class="btn btn-warning btn-xs">Sửa</a>
+                      <a href="" class="btn btn-danger btn-xs">Xóa</a>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+{% endblock %}

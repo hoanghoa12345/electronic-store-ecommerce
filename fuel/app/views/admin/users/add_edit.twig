@@ -1,0 +1,93 @@
+{% extends 'admin/layouts/base.twig' %}
+{% block css %}
+{% endblock %}
+{% block javascript %}
+{% endblock %}
+{% block content %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+      {{ description }}
+      <small>advanced tables</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/admin/users">Người dùng</a></li>
+        <li class="/admin/users/add">{{ description }}</li>
+      </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box box-primary">
+            <form action="" method="post">
+              <div class="box-header with-border">
+                <h3 class="box-title">{{ description }}</h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="username">Username *</label>
+                      <input type="text" class="form-control" name="username" id="username" placeholder="Nhập tên đăng nhập" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Họ & Tên *</label>
+                      <input type="text" class="form-control" name="name" id="name" placeholder="Nhập tên" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Địa chỉ email*</label>
+                      <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password *</label>
+                      <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="confirm_password">Nhập lại Password *</label>
+                      <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Vai trò *</label>
+                      <select class="form-control" id="group" name="group" required>
+                        <option value="100">Admin</option>
+                        <option value="50">Nhân viên</option>
+                        <option value="1">Khách hàng</option>
+                        <option value="0">Khách (Guest)</option>
+                        <option value="-1">Banned</option>
+                      </select>
+                    </div>
+                  </div>
+                <!-- /.col -->
+                <div class="col-md-6">
+                  <strong>Avatar</strong>
+                  <div class="image">
+                    <img src="http://localhost/electronic-store-ecommerce/public/assets/admin/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                  </div>
+                  <div class="form-group">
+                      <label for="avatar">Chọn đường dẫn đến tập tin ảnh</label>
+                      <input type="file" id="avatar" name="avatar">
+                      <p class="help-block">Định dạng ảnh JPEG, PNG. Dung lượng tối đa 1 MB</p>
+                    </div>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+              <p class="help-block">Những mục có dấu * là bắt buộc</p>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+{% endblock %}

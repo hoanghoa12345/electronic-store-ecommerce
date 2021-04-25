@@ -1,0 +1,49 @@
+{% include 'admin/layouts/header.twig' %}
+{% block css %}{% endblock %}
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+{% include 'admin/layouts/header_menu.twig' %}
+{% include 'admin/layouts/aside.twig' %}
+<div class="content-wrapper">
+{% if session_get_flash('success') %}
+<div class="alert alert-success alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h4><i class="icon fa fa-check"></i> Thành công!</h4>
+  {{ session_get_flash('success') }}
+</div>
+{% endif %}
+{% if session_get_flash('error') %}
+<div class="alert alert-danger alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h4><i class="icon fa fa-ban"></i> Có lỗi!</h4>
+  {{ session_get_flash('error') }}
+</div>
+{% endif %}
+{% block content %}{% endblock %}
+</div>
+{% include 'admin/layouts/footer.twig' %}
+{% block javascript %}{% endblock %}
+<div class="modal modal-warning fade" id="modal-logout">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Đăng xuất</h4>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có muốn đăng xuất ngay bây giờ không</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline"><a href="logout">Đăng xuất</a></button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+</body>
+</html>

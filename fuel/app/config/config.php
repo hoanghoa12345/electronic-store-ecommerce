@@ -180,7 +180,7 @@ return array(
 	 *  Change the server's default timezone. This is optional.
 	 */
 
-	// 'default_timezone' => null,
+	 'default_timezone' => 'Asia/Ho_Chi_Minh',
 
 	/**
 	 * -------------------------------------------------------------------------
@@ -449,7 +449,7 @@ return array(
 	 * -------------------------------------------------------------------------
 	 */
 
-	// 'always_load' => array(
+	'always_load' => array(
 		/**
 		 * ---------------------------------------------------------------------
 		 *  These packages are loaded on Fuel's startup.
@@ -467,9 +467,11 @@ return array(
 		 * ---------------------------------------------------------------------
 		 */
 
-		// 'packages' => array(
-		// 	// 'orm',
-		// ),
+		'packages' => array(
+			'orm',
+			'auth',
+			'parser'
+		),
 
 		/**
 		 * ---------------------------------------------------------------------
@@ -531,5 +533,5 @@ return array(
 		 */
 
 		// 'language' => array(),
-	// ),
+	),
 );

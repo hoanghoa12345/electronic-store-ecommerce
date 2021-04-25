@@ -12,10 +12,13 @@
 
 // Bootstrap the framework - THIS LINE NEEDS TO BE FIRST!
 require COREPATH.'bootstrap.php';
-
 // Add framework overload classes here
 \Autoloader::add_classes(array(
-	// Example: 'View' => APPPATH.'classes/myview.php',
+    'Twig_Fuel_Extension' => APPPATH . 'classes/twig/fuel/extension.php',
+));
+// Add framework overload classes here
+\Autoloader::add_classes(array(
+	'MyUploadFile' => APPPATH.'classes/helper/myuploadfile.php',
 ));
 
 // Register the autoloader
