@@ -12,6 +12,7 @@ return array (
         3 => '004_create_categories',
         4 => '005_add_foreign_keys_customers_table',
         5 => '006_add_foreign_keys_products_table',
+        6 => '007_create_brands',
       ),
     ),
     'module' => 

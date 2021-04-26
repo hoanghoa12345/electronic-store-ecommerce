@@ -19,6 +19,7 @@ class Create_products
 			'quantity' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
 			'primary_image' => array('constraint' => 255, 'null' => false, 'type' => 'varchar'),
 			'other_image' => array('constraint' => 255, 'null' => false, 'type' => 'varchar'),
+			'brand_id' => array('constraint' => 11, 'null' => false, 'type' => 'int', 'unsigned' => true, 'index' => true),
 			'created_at' => array('constraint' => 11, 'null' => true, 'type' => 'int', 'unsigned' => true),
 			'updated_at' => array('constraint' => 11, 'null' => true, 'type' => 'int', 'unsigned' => true),
 		), array('id'));

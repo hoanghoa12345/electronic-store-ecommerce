@@ -49,7 +49,7 @@
           </ul>
         </li>
 
-        <li><a href="#"><i class="glyphicon glyphicon-tags"></i><span>Thương hiệu</span></a></li>
+        <li><a href="{{url('admin/brand/index')}}"><i class="glyphicon glyphicon-tags"></i><span>Thương hiệu</span></a></li>
 
         <li><a href="{{ base_url() }}admin/category"><i class="fa fa-files-o"></i><span>Danh mục</span></a></li>
 
@@ -58,8 +58,8 @@
             <i class="fa fa-angle-left pull-right"></i>
           </span></a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Thêm sản phẩm</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Quản lý sản phẩm</a></li>
+            <li><a href="{{ url('admin/product/create')}}"><i class="fa fa-circle-o"></i>Thêm sản phẩm</a></li>
+            <li><a href="{{ url('admin/product/index')}}"><i class="fa fa-circle-o"></i>Quản lý sản phẩm</a></li>
           </ul>
         </li>
 

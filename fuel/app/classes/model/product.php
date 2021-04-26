@@ -17,7 +17,7 @@ class Model_Product extends \Orm\Model
 		),
 		"category_id" => array(
 			"label" => "Category id",
-			"data_type" => "varchar",
+			"data_type" => "int",
 		),
 		"small_description" => array(
 			"label" => "Small description",
@@ -50,6 +50,10 @@ class Model_Product extends \Orm\Model
 		"other_image" => array(
 			"label" => "Other image",
 			"data_type" => "varchar",
+		),
+		"brand_id" => array(
+			"label" => "Brand id",
+			"data_type" => "int",
 		),
 		"created_at" => array(
 			"label" => "Created at",
