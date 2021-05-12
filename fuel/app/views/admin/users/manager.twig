@@ -1,10 +1,10 @@
 {% extends 'admin/layouts/base.twig' %}
 {% block css %}
-<link rel="stylesheet" href="{{ base_url() }}assets/admin/css/dataTables.bootstrap.min.css">
+{{ asset_css('dataTables.bootstrap.min.css') }}
 {% endblock %}
 {% block javascript %}
-<script src="{{ base_url() }}assets/admin/js/jquery.dataTables.min.js"></script>
-<script src="{{ base_url() }}assets/admin/js/dataTables.bootstrap.min.js"></script>
+{{ asset_js('jquery.dataTables.min.js') }}
+{{ asset_js('dataTables.bootstrap.min.js') }}
 <script>
   $(function () {
     $('#example1').DataTable()
@@ -47,35 +47,31 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>id</th>
-                  <th>username</th>
-                  <th>email</th>
-                  <th>họ</th>
-                  <th>tên</th>
-                  <th>ngày tham gia</th>
-                  <th>Vai trò</th>
+                  <th>ID</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Ngày tham gia</th>
+                  <th>Group Id</th>
                   <th>Ảnh đại diện</th>
                   <th>Hành động</th>
                 </tr>
                 </thead>
                 <tbody>
+                {% for user in users %}
                 <tr>
-                  <td>1</td>
-                  <td>hoanghoa</td>
-                  <td>hoanghoa12@gmail.com</td>
-                  <td>Hoàng</td>
-                  <td>Hòa</td>
-                  <td>25/12/2020</td>
-                  <td>admin</td>
-                  <td>image.jpg</td>
-                  <td>
-                    <div>
-                      <a href="" class="btn btn-primary btn-xs">Xem</a>
-                      <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                      <a href="" class="btn btn-danger btn-xs">Xóa</a>
-                    </div>
-                  </td>
+                	<td>{{user.id}}</td>
+                	<td>{{user.username}}</td>
+                	<td>{{user.email}}</td>
+                	<td>{{user.created_date}}</td>
+                	<td>{{user.group_id}}</td>
+                	<td>{{asset_img(user.avatar,{'class':'img-circle','width':'45'})}}</td>
+                	<td>
+                		<a href="" class="btn btn-primary btn-xs">Xem</a>
+                		<a href="" class="btn btn-warning btn-xs">Sửa</a>
+                		<a href="" class="btn btn-danger btn-xs">Xóa</a>
+                	</td>
                 </tr>
+                {% endfor %}
                 </tbody>
               </table>
             </div>

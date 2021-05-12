@@ -22,9 +22,9 @@
 return array(
 	'default' => array(
 		'connection' => array(
-			'dsn'      => 'mysql:host=localhost;dbname=electronic-store-ecommerce',
-			'username' => 'root',
-			'password' => '123456',
+			'dsn'      => Arr::get($_ENV,'DB_DSN','mysql:host=localhost;dbname=fuel_db'),
+			'username' => Arr::get($_ENV,'DB_USERNAME','root'),
+			'password' => Arr::get($_ENV,'DB_PASSWORD',''),
 		),
 	),
 );

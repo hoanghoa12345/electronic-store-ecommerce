@@ -142,7 +142,7 @@ return array(
 	 *  The default language.
 	 */
 
-	// 'language' => 'en',
+	'language' => 'en',
 
 	/**
 	 *  Fallback language when file isn't available for default language.
@@ -154,7 +154,7 @@ return array(
 	 *  PHP set_locale() setting. Use null to not set.
 	 */
 
-	// 'locale' => 'en_US',
+	'locale' => 'en_US',
 
 	/**
 	 * -------------------------------------------------------------------------
@@ -162,7 +162,7 @@ return array(
 	 * -------------------------------------------------------------------------
 	 */
 
-	// 'encoding' => 'UTF-8',
+	'encoding' => 'UTF-8',
 
 	/**
 	 * -------------------------------------------------------------------------
@@ -369,9 +369,12 @@ return array(
 	 *
 	 */
 
-	// 'validation' => array(
-		// 'global_input_fallback' => true,
-	// ),
+	'validation' => array(
+		'no_errors' => '',
+		'open_error' => '<li>',
+		'close_error' => '</li>',
+		'global_input_fallback' => true,
+	),
 
 	/**
 	 * -------------------------------------------------------------------------
@@ -533,5 +536,5 @@ return array(
 		 */
 
 		// 'language' => array(),
-	),
+	)
 );

@@ -1,0 +1,71 @@
+{% extends "frontend/layouts/base.twig" %}
+
+{% block content %}
+	<div id="content" class="site-content" tabindex="-1">
+                <div class="container">
+
+                    <nav class="woocommerce-breadcrumb" ><a href="home.html">Home</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>Smart Phones &amp; Tablets</nav>
+
+                    <div id="primary" class="content-area">
+                        <main id="main" class="site-main">
+
+                            <section class="section-product-cards-carousel" >
+                                <header>
+                                    <h2 class="h1">Recommended Products</h2>
+                                    <div class="owl-nav">
+                                        <a href="#products-carousel-prev" data-target="#recommended-product" class="slider-prev"><i class="fa fa-angle-left"></i></a>
+                                        <a href="#products-carousel-next" data-target="#recommended-product" class="slider-next"><i class="fa fa-angle-right"></i></a>
+                                    </div>
+                                </header>
+
+                                <div id="recommended-product">
+                                    <div class="woocommerce columns-4">
+                                        <div class="products owl-carousel products-carousel columns-4 owl-loaded owl-drag">
+
+                                            {% include "frontend/layouts/components/product-carousel-item.twig" %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <header class="page-header">
+                                <h1 class="page-title">Smart Phones &amp; Tablets</h1>
+                                <p class="woocommerce-result-count">Showing 1&ndash;15 of 20 results</p>
+                            </header>
+
+                            <div class="shop-control-bar">
+                                <ul class="shop-view-switcher nav nav-tabs" role="tablist">
+                                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" title="Grid View" href="#grid"><i class="fa fa-th"></i></a></li>
+                                    <li class="nav-item"><a class="nav-link " data-toggle="tab" title="Grid Extended View" href="#grid-extended"><i class="fa fa-align-justify"></i></a></li>
+                                    <li class="nav-item"><a class="nav-link " data-toggle="tab" title="List View" href="#list-view"><i class="fa fa-list"></i></a></li>
+                                    <li class="nav-item"><a class="nav-link " data-toggle="tab" title="List View Small" href="#list-view-small"><i class="fa fa-th-list"></i></a></li>
+                                </ul>
+                                {% include "frontend/layouts/components/shop-control-bar.twig" %}
+                            </div>
+
+                            <div class="tab-content">
+
+										{% include "frontend/layouts/components/product-grid.twig" %}
+										{% include "frontend/layouts/components/product-grid-ext.twig" %}
+										{% include "frontend/layouts/components/product-list-view.twig" %}
+										{% include "frontend/layouts/components/product-list-view-small.twig" %}
+
+								</div>
+								{% include "frontend/layouts/components/shop-control-bar-bottom.twig" %}
+
+                        </main><!-- #main -->
+                    </div><!-- #primary -->
+
+                    <div id="sidebar" class="sidebar" role="complementary">
+                        {% include "frontend/layouts/sidebar/product-categories-widget.twig" %}
+                        {% include "frontend/layouts/sidebar/product-filters-sidebar.twig" %}
+                        {% include "frontend/layouts/sidebar/home-v2-ad-block.twig" %}
+                        {% include "frontend/layouts/sidebar/latest-products.twig" %}
+                    </div>
+
+                </div><!-- .container -->
+            </div><!-- #content -->
+
+
+{% endblock %}

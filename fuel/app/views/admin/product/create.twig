@@ -1,0 +1,120 @@
+{% extends 'admin/layouts/base.twig' %}
+{% block css %}
+	<link rel="stylesheet" href="{{ base_url() }}assets/admin/css/bootstrap3-wysihtml5.min.css">
+{% endblock %}
+{% block javascript %}
+	<script src="{{ base_url() }}assets/admin/js/bootstrap3-wysihtml5.all.min.js"></script>
+	<script>
+		$(function () { // bootstrap WYSIHTML5 - text editor
+			$('.textarea').wysihtml5();
+		});
+	</script>
+{% endblock %}
+{% block content %}
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			{{title}}
+			<small>advanced tables</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li>
+				<a href="{{ url('admin') }}">
+					<i class="fa fa-dashboard"></i>
+					Home</a>
+			</li>
+			<li class="{{ url('admin/product/create')}}">{{subtitle}}</li>
+		</ol>
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+        <form action="{{ url("admin/product/create") }}" method="post" enctype="multipart/form-data" id="form">
+					<div class="box-header">
+						<div class="box-title">{{subtitle}}</div>
+					</div>
+					<div class="box-body">
+							<div class="form-group {%if error_field.title != null %}has-error{% endif %}">
+								<label for="title">Tên Product *</label>
+								<input type="text" class="form-control" name="title" id="title" placeholder="Nhập Product name" value="{{ post.title }}" required>
+								<span class="help-block">{{error_field.title}}</span>
+							</div>
+							<div class="form-group {%if error_field.category_id != null %}has-error{% endif %}">
+								<label>Category</label>
+								<select class="form-control select2" name="category_id" id="category_id" style="width: 100%;" value="{{ post.category_id }}">
+									<option value="-1" selected="selected">--Chọn category--</option>
+									{% for item in categories %}
+										<option value="{{item.id}}">{{item.name}}</option>
+									{% endfor %}
+								</select>
+								<span class="help-block">{{error_field.category_id}}</span>
+							</div>
+							<div class="form-group {%if error_field.small_description != null %}has-error{% endif %}">
+								<label for="small_description">Mô tả</label>
+								<textarea class="form-control" name="small_description" id="small_description" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ post.small_description }}</textarea>
+								<span class="help-block">{{error_field.small_description}}</span>
+							</div>
+							<div class="form-group {%if error_field.large_description != null %}has-error{% endif %}">
+								<label for="large_description">Mô tả chi tiết</label>
+								<textarea class="textarea" id="large_description" name="large_description" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ post.large_description }}</textarea>
+								<span class="help-block">{{error_field.large_description}}</span>
+							</div>
+							<div class="form-group {%if error_field.regular_price != null %}has-error{% endif %}">
+								<label for="regular_price">Giá gốc</label>
+								<input class="form-control" type="text" name="regular_price" id="regular_price" value="{{ post.regular_price }}">
+								<span class="help-block">{{error_field.regular_price}}</span>
+							</div>
+							<div class="form-group {%if error_field.discounted_price != null %}has-error{% endif %}">
+								<label for="discounted_price">Giá giảm</label>
+								<input class="form-control" type="text" name="discounted_price" id="discounted_price" value="{{ post.discounted_price }}">
+								<span class="help-block">{{error_field.discounted_price}}</span>
+							</div>
+							<div class="form-group {%if error_field.sku != null %}has-error{% endif %}">
+								<label for="sku">SKU</label>
+								<input class="form-control" type="text" name="sku" id="sku" value="{{ post.sku }}">
+								<span class="help-block">{{error_field.sku}}</span>
+							</div>
+							<div class="form-group {%if error_field.quantity != null %}has-error{% endif %}">
+								<label for="quantity">Số lượng</label>
+								<input class="form-control" type="number" name="quantity" id="quantity" value="{{ post.quantity }}">
+								<span class="help-block">{{error_field.quantity}}</span>
+							</div>
+							<div class="form-group">
+								<label for="primary_image">Chọn tập tin ảnh thumbnail</label>
+								<input class="form-control" type="file" id="primary_image" name="primary_image">
+							</div>
+							<div class="form-group">
+								<label for="other_image_1">Chọn tập tin ảnh chi tiết</label>
+								<input class="form-control" type="file" id="other_image_1" name="other_image_1">
+								<input class="form-control" type="file" id="other_image_2" name="other_image_2">
+								<input class="form-control" type="file" id="other_image_3" name="other_image_3">
+								<input class="form-control" type="file" id="other_image_4" name="other_image_4">
+								<input class="form-control" type="file" id="other_image_5" name="other_image_5">
+								<input class="form-control" type="file" id="other_image_6" name="other_image_6">
+							</div>
+							<div class="form-group {%if error_field.brand_id != null %}has-error{% endif %}">
+								<label>Brand</label>
+								<select class="form-control select2" name="brand_id" id="brand_id" style="width: 100%;" value="{{post.brand_id}}">
+									<option value="-1">--Chọn brand--</option>
+									{% for item in brands %}
+										<option value="{{item.id}}">{{item.name}}</option>
+									{% endfor %}
+								</select>
+								<span class="help-block">{{error_field.brand_id}}</span>
+							</div>
+						</div>
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary">Thêm product</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</section>
+	<!-- /.content -->
+{% endblock %}

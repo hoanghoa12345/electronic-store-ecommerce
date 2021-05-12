@@ -1,0 +1,32 @@
+{% extends "frontend/layouts/base.twig" %}
+{% block content %}
+	<div id="content" class="site-content" tabindex="-1">
+		<div class="container">
+
+			<nav class="woocommerce-breadcrumb">
+				<a href="{{ url('home') }}">Trang chủ</a>
+				<span class="delimiter">
+					<i class="fa fa-angle-right"></i>
+				</span>Tài khoản</nav>
+			<!-- .woocommerce-breadcrumb -->
+
+			<div id="primary" class="content-area">
+				<main id="main" class="site-main">
+          <div class="row">
+            <div class="col-lg-4 col-md-4 col-xs-12">
+              <ul>
+                <li><a href="">Dashboard</a></li>
+                <li><a href="">Orders</a></li>
+                <li><a href="">Reviews</a></li>
+                <li><a href="">Comments</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-12">
+            <h1>Profile</h1>
+            </div>
+          </div>
+        </main>
+			</div>
+		</div>
+	</div>
+{% endblock %}

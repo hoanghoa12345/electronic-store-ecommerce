@@ -1,6 +1,10 @@
 <?php
 
 use Fuel\Core\Response;
+use Parser\View;
+use Fuel\Core\Input;
+use Fuel\Core\Session;
+use Fuel\Core\Inflector;
 
 class Controller_Admin_Brand extends Controller_Admin
 {
@@ -26,7 +30,7 @@ class Controller_Admin_Brand extends Controller_Admin
 				Session::set_flash('success', 'Đã thêm brand #' . $brand->id);
 				Response::redirect('admin/brand/index');
 			} else {
-				Session::set_flash('error', 'Chưa thêm được brand');
+				Session::set_flash('error', 'Chưa thêm được thương hiệu');
 			}
 		} 
 		return Response::forge($view);

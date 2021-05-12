@@ -1,5 +1,6 @@
 <?php
 
+use Fuel\Core\Asset;
 use Fuel\Core\Date;
 use Fuel\Core\Debug;
 use Fuel\Core\Input;
@@ -81,20 +82,6 @@ class Controller_Admin_Category extends Controller_Admin
 		return Response::forge($view);
 	}
 
-	public function action_upload()
-	{
-		/*$uploaded = MyUploadFile::doUpload();
-		//echo json_encode($uploaded);
-		//Debug::dump($uploaded);
-		//echo $uploaded['get_files']['0']['saved_as'];
-		foreach($uploaded as $file_info)
-		{
-			echo $file_info['saved_as'];
-			//get file name save to database
-		}*/
-		echo MyUploadFile::avatar();
-	}
-
 	public function action_date()
 	{
 		print_r(Date::time());
@@ -131,5 +118,11 @@ class Controller_Admin_Category extends Controller_Admin
 					->crop_resize(200, 200)
 					->save('image');
 		} 
+	}
+	public function action_test()
+	{
+		Asset::add_path(DOCROOT,'img');
+		Debug::dump(Asset::img('files/04_2021/78dea821085b77ece03472c20ff0ad37.jpg', 'img'));
+		
 	}
 }

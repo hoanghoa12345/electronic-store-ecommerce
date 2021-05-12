@@ -202,19 +202,20 @@
 </div>
 <!-- ./wrapper -->
 
+{{ asset_add_path('assets/admin/js/','js') }}
 <!-- jQuery 3 -->
-<script src="{{ base_url() }}assets/admin/js/jquery.min.js"></script>
+{{ asset_js('jquery.min.js') }}
+{{ asset_js('pace.min.js') }}
 <!-- jQuery UI 1.11.4 -->
-<script src="{{ base_url() }}assets/admin/js/jquery-ui.min.js"></script>
+{{ asset_js('jquery-ui.min.js') }}
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <!-- Bootstrap 3.3.7 -->
-<script src="{{ base_url() }}assets/admin/js/bootstrap.min.js"></script>
+{{ asset_js('bootstrap.min.js') }}
 <!-- AdminLTE App -->
-<script src="{{ base_url() }}assets/admin/js/adminlte.min.js"></script>
-{{ asset_js('pace.min.js') }}
+{{ asset_js('adminlte.min.js') }}
 <!-- Slimscroll -->
-<script src="{{ base_url() }}assets/admin/js/jquery.slimscroll.min.js"></script>
+{{ asset_js('jquery.slimscroll.min.js') }}
 <!-- FastClick -->
-<script src="{{ base_url() }}assets/admin/js/fastclick.js"></script>
+{{ asset_js('fastclick.js') }}
 <!-- AdminLTE for demo purposes -->
-<script src="{{ base_url() }}assets/admin/js/demo.js"></script>
+{{ asset_js('demo.js') }}

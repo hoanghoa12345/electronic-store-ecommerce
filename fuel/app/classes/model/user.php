@@ -19,8 +19,8 @@ class Model_User extends \Orm\Model
 			"label" => "Name",
 			"data_type" => "varchar",
 		),
-		"group" => array(
-			"label" => "Group",
+		"group_id" => array(
+			"label" => "Group Id",
 			"data_type" => "int",
 		),
 		"email" => array(
@@ -43,9 +43,17 @@ class Model_User extends \Orm\Model
 			"label" => "Last login",
 			"data_type" => "varchar",
 		),
+		"previous_login" => array(
+			"label" => "Previous login",
+			"data_type" => "varchar",
+		),
 		"login_hash" => array(
 			"label" => "Login hash",
 			"data_type" => "varchar",
+		),
+		"user_id" => array(
+			"label" => "User Id",
+			"data_type" => "int",
 		),
 		"profile_fields" => array(
 			"label" => "Profile fields",

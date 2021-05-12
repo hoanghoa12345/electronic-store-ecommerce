@@ -27,7 +27,7 @@ return array(
 	 *
 	 */
 
-	'_404_' => 'home/404',
+	'_404_' => 'error/404',
 
 	/**
 	 * -------------------------------------------------------------------------
@@ -39,4 +39,6 @@ return array(
 	 */
 
 	'hello(/:name)?' => array('welcome/hello', 'name' => 'hello'),
+	'p(/:name)?' => array('product/detail', 'name'=>'product'),
+	'cat(/:name)?' => array('product/category', 'name'=>'cat'),
 );

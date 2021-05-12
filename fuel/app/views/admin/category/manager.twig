@@ -1,10 +1,10 @@
 {% extends 'admin/layouts/base.twig' %}
 {% block css %}
-<link rel="stylesheet" href="{{ base_url() }}assets/admin/css/dataTables.bootstrap.min.css">
+{{ asset_css('dataTables.bootstrap.min.css') }}
 {% endblock %}
 {% block javascript %}
-<script src="{{ base_url() }}assets/admin/js/jquery.dataTables.min.js"></script>
-<script src="{{ base_url() }}assets/admin/js/dataTables.bootstrap.min.js"></script>
+{{ asset_js('jquery.dataTables.min.js') }}
+{{ asset_js('dataTables.bootstrap.min.js') }}
 <script>
   $(function () {
     $('#example1').DataTable()

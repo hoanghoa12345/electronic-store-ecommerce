@@ -5,5 +5,7 @@ class Presenter_Admin_Product_Manager extends Presenter
 	{
 		$this->title = "Quản lý sản phẩm";
 		$this->subtitle = "Sản phẩm";
+
+		$this->products = Model_Product::find('all');
 	}
 }

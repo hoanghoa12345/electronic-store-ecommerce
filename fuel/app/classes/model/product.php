@@ -49,7 +49,7 @@ class Model_Product extends \Orm\Model
 		),
 		"other_image" => array(
 			"label" => "Other image",
-			"data_type" => "varchar",
+			"data_type" => "text",
 		),
 		"brand_id" => array(
 			"label" => "Brand id",
@@ -63,6 +63,22 @@ class Model_Product extends \Orm\Model
 			"label" => "Updated at",
 			"data_type" => "int",
 		),
+		"child_cat_id" => array(
+			"label" => "Child Category Id",
+			"data_type" => "int"
+		),
+		"status" => array(
+			"label" => "Status",
+			"data_type" => "enum"
+		),
+		"colors" => array(
+			"label" => "Colors",
+			"data_type" => "text"
+		),
+		"specifications" => array(
+			"label" => "Specifications",
+			"data_type" => "longtext"
+		)
 	);
 
 	protected static $_observers = array(
