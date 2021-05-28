@@ -1,22 +1,26 @@
 <?php
+use Parser\View;
+use Fuel\Core\Response;
 class Controller_Home extends Controller_Base
 {
   public function action_index()
   {
     $view = View::forge('frontend/index.twig');
     $view->title = "Điện thoại, Laptop và phụ kiện chính hãng";
-    $view->bodyClass = "home page-template page-template-template-homepage-v3 full-color-background";
-    return Response::forge($view);
-  }
+    $view->carousels = Model_Banner::find('all', array(
+      'where' => array(
+          array('type', 1),
+      )));
+    $view->top_images = Model_Banner::find('all', array(
+      'where' => array(
+          array('type', 2),
+      )));
+    $view->mid_images = Model_Banner::find('first', array(
+      'where' => array(
+          array('type', 3),
+      )));
 
-  public function action_category()
-  {
-    $categories = Model_Category::find('all');
-    $arr_category = array();
-    foreach ($categories as $category)
-    {
-      array_push($arr_category,$category->to_array());
-    }
-    echo json_encode($arr_category);
+    //$view->top_selling = Model_Product::find('all', array('rows_limit' => 8));
+    return Response::forge($view);
   }
 }

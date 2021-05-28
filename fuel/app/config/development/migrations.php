@@ -24,6 +24,7 @@ return array (
         15 => '020_create_post_categories',
         16 => '021_create_post_comments',
         17 => '022_create_posts',
+        18 => '023_create_order_details',
       ),
     ),
     'module' => 

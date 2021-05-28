@@ -1,7 +1,8 @@
 <?php
 
 use Fuel\Core\Debug;
-
+use Parser\View;
+use Fuel\Core\Response;
 class Controller_Shop extends Controller_Base
 {
   public function action_index()

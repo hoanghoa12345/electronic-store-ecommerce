@@ -8,8 +8,20 @@
 	{{asset_js('fileinput.min.js')}}
 	<script>
 		$(function () { // bootstrap WYSIHTML5 - text editor
-$('.textarea').wysihtml5();
-var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' + 
+			$('.textarea').wysihtml5();
+			$('#form_category_id').on('change', function(){
+				var category_id = this.value;
+
+				$.ajax({
+					url:"/admin/childcategory/ajax/" + category_id,
+					type:"GET",
+					cache: false,
+					success: function(result){
+						$("#form_child_cat_id").html(result);
+					}
+				})
+			})
+		var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' + 
         'onclick="alert(\'Call your custom code here.\')">' +
         '<i class="glyphicon glyphicon-tag"></i>' +
         '</button>'; 
@@ -30,7 +42,7 @@ var btnCust = '<button type="button" class="btn btn-secondary" title="Add pictur
         msgErrorClass: 'alert alert-block alert-danger',
         initialPreviewAsData: true,
 				initialPreview: [
-            {% for image in other_image %}
+            {% for image in other_images %}
               '{{url(image)}}',
             {% endfor %}
         ],
@@ -74,7 +86,7 @@ var btnCust = '<button type="button" class="btn btn-secondary" title="Add pictur
 							{{form_label('Tên sản phẩm','title',{'class':'control-label'})}}
 							{{form_input('title',product.title,{'class':'form-control'})}}
 						</div>
-						<div class="form-group">
+						{#<div class="form-group">
 								<label>Category</label>
 								<select class="form-control select_group" name="category_id" id="category_id" style="width: 100%;">
 									<option value="-1">--Chọn category--</option>
@@ -82,30 +94,56 @@ var btnCust = '<button type="button" class="btn btn-secondary" title="Add pictur
 										<option value="{{item.id}}" {% if product.category_id == item.id %} selected {% endif %}>{{item.name}}</option>
 									{% endfor %}
 								</select>
+							</div>#}
+						<div class="row">
+							<div class="col-md-6 mb-3 form-group">
+								{{form_label('Category','category_id',{'class':'control-label'})}}
+								{{form_select('category_id',product.category_id,options_categories,{"class":"form-control"})}}
 							</div>
+							<div class="col-md-6 mb-3 form-group">
+								{{form_label('Child Category','child_cat_id',{'class':'control-label'})}}
+								{{form_select('child_cat_id',product.child_cat_id,{1:"--Chọn Child Category"},{"class":"form-control"})}}
+							</div>
+						</div>
 						<div class="form-group">
 							{{form_label('Mô tả','small_description',{'class':'control-label'})}}
 							{{form_textarea('small_description',product.small_description,{'class':'form-control'})}}
 						</div>
 						<div class="form-group">
-							{{form_label('Mô tản chi tiết','large_description',{'class':'control-label'})}}
+							{{form_label('Mô tả chi tiết','large_description',{'class':'control-label'})}}
 							{{form_textarea('large_description',product.large_description,{'class':'form-control textarea'})}}
 						</div>
 						<div class="form-group">
-							{{form_label('Giá gốc','regular_price',{'class':'control-label'})}}
-							{{form_input('regular_price',product.regular_price,{'class':'form-control'})}}
+							{{form_label('Thông số kỹ thuật','specifications',{'class':'control-label'})}}
+							{{form_textarea('specifications',product.specifications,{'class':'form-control textarea'})}}
 						</div>
-						<div class="form-group">
-							{{form_label('Giá giảm','discounted_price',{'class':'control-label'})}}
-							{{form_input('discounted_price',product.discounted_price,{'class':'form-control'})}}
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								{{form_label('Màu sắc','colors',{'class':'control-label'})}}
+								{{form_input('colors',product.colors,{'class':'form-control','type':'text'})}}
+							</div>
+							<div class="col-md-6 mb-3">
+								{{form_label('Trạng thái','status',{'class':'control-label'})}}
+								{{form_select('status',product.status,{"active":"Kích hoạt","inactive":"Ẩn sản phẩm"},{"class":"form-control"})}}
+							</div>
 						</div>
-						<div class="form-group">
-							{{form_label('SKU','sku',{'class':'control-label'})}}
-							{{form_input('sku',product.sku,{'class':'form-control'})}}
-						</div>
-						<div class="form-group">
-							{{form_label('Số lượng','quantity',{'class':'control-label'})}}
-							{{form_input('quantity',product.quantity,{'class':'form-control','type':'number'})}}
+						<div class="row">
+							<div class="col-md-3 mb-3 form-group">
+								{{form_label('Giá gốc','regular_price',{'class':'control-label'})}}
+								{{form_input('regular_price',product.regular_price,{'class':'form-control'})}}
+							</div>
+							<div class="col-md-3 mb-3 form-group">
+								{{form_label('Giá giảm','discounted_price',{'class':'control-label'})}}
+								{{form_input('discounted_price',product.discounted_price,{'class':'form-control'})}}
+							</div>
+							<div class="col-md-3 mb-3 form-group">
+								{{form_label('SKU','sku',{'class':'control-label'})}}
+								{{form_input('sku',product.sku,{'class':'form-control'})}}
+							</div>
+							<div class="col-md-3 mb-3 form-group">
+								{{form_label('Số lượng','quantity',{'class':'control-label'})}}
+								{{form_input('quantity',product.quantity,{'class':'form-control','type':'number'})}}
+							</div>
 						</div>
 						<div class="form-group">
                   <label for="product_image">Image</label>
@@ -115,7 +153,7 @@ var btnCust = '<button type="button" class="btn btn-secondary" title="Add pictur
                       </div>
                   </div>
                 </div>
-            <div class="form-group">
+            {#<div class="form-group">
 								<label>Brand</label>
 								<select class="form-control select_group" name="brand_id" id="brand_id" style="width: 100%;">
 									<option value="-1">--Chọn brand--</option>
@@ -123,7 +161,23 @@ var btnCust = '<button type="button" class="btn btn-secondary" title="Add pictur
 										<option value="{{item.id}}" {% if product.brand_id == item.id %} selected {% endif %}>{{item.name}}</option>
 									{% endfor %}
 								</select>
-							</div>
+							</div>#}
+						<div class="form-group">
+							{{form_label("Hình ảnh sản phẩm","other_image")}}
+							{% for key, image in  other_images %}
+								<input type="text" name="other_image_{{key}}" value="{{image}}" class="form-control">
+							{% endfor %}
+							{#{form_textarea('other_image',product.other_image,{'class':'form-control'})}#}
+							<table>
+							<thead>
+							<th></th>
+							</thead>
+							</table>
+						</div>
+						<div class="form-group">
+							{{form_label('Brand','brand_id',{'class':'control-label'})}}
+							{{form_select('brand_id',product.brand_id,options_brands,{"class":"form-control"})}}
+						</div
 						<div class="form-group">
 							{{form_submit('submit','Cập nhật',{'class':'btn btn-primary'})}}
               {{form_reset('reset','Làm mới',{'class':'btn btn-normal'})}}

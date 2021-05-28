@@ -1,6 +1,14 @@
 {% extends 'admin/layouts/base.twig' %}
 {% block css %}
 {{ asset_css('dataTables.bootstrap.min.css') }}
+<style>
+.fix_cover {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    object-position: 20% 10%;
+  }
+</style>
 {% endblock %}
 {% block javascript %}
 {{ asset_js('jquery.dataTables.min.js') }}
@@ -28,7 +36,7 @@
     <section class="content-header">
       <h1>
         Quản lý danh mục
-        <small>advanced tables</small>
+        <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -65,9 +73,10 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>id</th>
-                  <th>tên danh mục</th>
-                  <th>slug</th>
+                  <th>Id</th>
+                  <th>Tên danh mục</th>
+                  <th>Slug</th>
+                  <th>Image</th>
                   <th>Hành động</th>
                 </tr>
                 </thead>
@@ -77,9 +86,10 @@
                   <td>{{ category.id }}</td>
                   <td>{{ category.name }}</td>
                   <td>{{ category.slug }}</td>
+                  <td><img src="{{category.image}}" class="img-fluid fix_cover"></td>
                   <td>
                     <div>
-                      <a href="{{base_url()}}admin/category/view/{{category.id}}" class="btn btn-primary btn-xs">Xem</a>
+                      <a href="{{base_url()}}admin/childcategory/view/{{category.id}}" class="btn btn-primary btn-xs">Xem</a>
                       <a href="{{base_url()}}admin/category/edit/{{category.id}}" class="btn btn-warning btn-xs">Sửa</a>
                       <a href="javascript:void(0)" class="deleteCategory btn btn-danger btn-xs" data-id="{{category.id}}" data-toggle="modal" data-target="#modal-delete">Xóa</a>
                     </div>

@@ -7,6 +7,18 @@
 	<script>
 		$(function () { // bootstrap WYSIHTML5 - text editor
 			$('.textarea').wysihtml5();
+			$('#category_id').on('change', function(){
+				var category_id = this.value;
+
+				$.ajax({
+					url:"/admin/childcategory/ajax/" + category_id,
+					type:"GET",
+					cache: false,
+					success: function(result){
+						$("#child_cat_id").html(result);
+					}
+				})
+			})
 		});
 	</script>
 {% endblock %}
@@ -42,7 +54,8 @@
 								<input type="text" class="form-control" name="title" id="title" placeholder="Nhập Product name" value="{{ post.title }}" required>
 								<span class="help-block">{{error_field.title}}</span>
 							</div>
-							<div class="form-group {%if error_field.category_id != null %}has-error{% endif %}">
+							<div class="row">
+							<div class="col-md-6 mb-3 form-group {%if error_field.category_id != null %}has-error{% endif %}">
 								<label>Category</label>
 								<select class="form-control select2" name="category_id" id="category_id" style="width: 100%;" value="{{ post.category_id }}">
 									<option value="-1" selected="selected">--Chọn category--</option>
@@ -51,6 +64,14 @@
 									{% endfor %}
 								</select>
 								<span class="help-block">{{error_field.category_id}}</span>
+							</div>
+							<div class="col-md-6 mb-3 form-group {%if error_field.category_id != null %}has-error{% endif %}">
+									<label for="child_cat_id">Child Category</label>
+									<select name="child_cat_id" id="child_cat_id" class="form-control select2">
+										<option value="-1" selected="selected">--Chọn child category--</option>
+									</select>
+									<span class="help-block">{{error_field.category_id}}</span>
+								</div>
 							</div>
 							<div class="form-group {%if error_field.small_description != null %}has-error{% endif %}">
 								<label for="small_description">Mô tả</label>
@@ -62,25 +83,45 @@
 								<textarea class="textarea" id="large_description" name="large_description" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ post.large_description }}</textarea>
 								<span class="help-block">{{error_field.large_description}}</span>
 							</div>
-							<div class="form-group {%if error_field.regular_price != null %}has-error{% endif %}">
+							<div class="form-group">
+								<label for="specifications">Thông số kỹ thuật</label>
+								<textarea class="textarea" id="specifications" name="specifications" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ post.large_description }}</textarea>
+								<span class="help-block"></span>
+							</div>
+							<div class="row">
+							<div class="col-md-6 mb-3">
+								<label for="colors">Màu sắc</label>
+								<input type="text" name="colors" id="colors" class="form-control" >
+							</div>
+							<div class="col-md-6 mb-3">
+								<label for="status">Trạng thái</label>
+								<select name="status" id="status" class="form-control">
+									<option value="active">Kích hoạt</option>
+									<option value="inactive">Ẩn sản phẩm</option>
+								</select>
+							</div>
+							</div>
+							<div class="row">
+							<div class="col-md-3 mb-3 form-group {%if error_field.regular_price != null %}has-error{% endif %}">
 								<label for="regular_price">Giá gốc</label>
 								<input class="form-control" type="text" name="regular_price" id="regular_price" value="{{ post.regular_price }}">
 								<span class="help-block">{{error_field.regular_price}}</span>
 							</div>
-							<div class="form-group {%if error_field.discounted_price != null %}has-error{% endif %}">
+							<div class="col-md-3 mb-3 form-group {%if error_field.discounted_price != null %}has-error{% endif %}">
 								<label for="discounted_price">Giá giảm</label>
 								<input class="form-control" type="text" name="discounted_price" id="discounted_price" value="{{ post.discounted_price }}">
 								<span class="help-block">{{error_field.discounted_price}}</span>
 							</div>
-							<div class="form-group {%if error_field.sku != null %}has-error{% endif %}">
+							<div class="col-md-3 mb-3 form-group {%if error_field.sku != null %}has-error{% endif %}">
 								<label for="sku">SKU</label>
 								<input class="form-control" type="text" name="sku" id="sku" value="{{ post.sku }}">
 								<span class="help-block">{{error_field.sku}}</span>
 							</div>
-							<div class="form-group {%if error_field.quantity != null %}has-error{% endif %}">
+							<div class="col-md-3 mb-3 form-group {%if error_field.quantity != null %}has-error{% endif %}">
 								<label for="quantity">Số lượng</label>
 								<input class="form-control" type="number" name="quantity" id="quantity" value="{{ post.quantity }}">
 								<span class="help-block">{{error_field.quantity}}</span>
+							</div>
 							</div>
 							<div class="form-group">
 								<label for="primary_image">Chọn tập tin ảnh thumbnail</label>
@@ -88,12 +129,34 @@
 							</div>
 							<div class="form-group">
 								<label for="other_image_1">Chọn tập tin ảnh chi tiết</label>
-								<input class="form-control" type="file" id="other_image_1" name="other_image_1">
-								<input class="form-control" type="file" id="other_image_2" name="other_image_2">
-								<input class="form-control" type="file" id="other_image_3" name="other_image_3">
-								<input class="form-control" type="file" id="other_image_4" name="other_image_4">
-								<input class="form-control" type="file" id="other_image_5" name="other_image_5">
-								<input class="form-control" type="file" id="other_image_6" name="other_image_6">
+							</div>
+							<div class="row">
+								<div class="col-md-4 mb-3">
+									<label for="other_image_1"> Hình 1 </label>
+									<input class="form-control" type="file" id="other_image_1" name="other_image_1">
+									</div>
+								<div class="col-md-4 mb-3">
+									<label for="other_image_2"> Hình 2 </label>
+									<input class="form-control" type="file" id="other_image_2" name="other_image_2">
+									</div>
+								<div class="col-md-4 mb-3">
+									<label for="other_image_3"> Hình 3 </label>
+									<input class="form-control" type="file" id="other_image_3" name="other_image_3">
+									</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 mb-3">
+									<label for="other_image_4"> Hình 4 </label>
+									<input class="form-control" type="file" id="other_image_4" name="other_image_4">
+									</div>
+								<div class="col-md-4 mb-3">
+									<label for="other_image_5"> Hình 5 </label>
+									<input class="form-control" type="file" id="other_image_5" name="other_image_5">
+									</div>
+								<div class="col-md-4 mb-3">
+									<label for="other_image_6"> Hình 6 </label>
+									<input class="form-control" type="file" id="other_image_6" name="other_image_6">
+								</div>
 							</div>
 							<div class="form-group {%if error_field.brand_id != null %}has-error{% endif %}">
 								<label>Brand</label>

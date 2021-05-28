@@ -4,21 +4,21 @@ use Fuel\Core\Debug;
 use Fuel\Core\Input;
 use Parser\View;
 use Fuel\Core\Response;
+use Fuel\Core\HttpNoAccessException;
+use Auth\Auth;
+use Fuel\Core\Controller;
 class Controller_Admin extends Controller
 {
 	private $current_user;
 	public function before()
 	{
-		if ( ! Auth::check())
+		if (!Auth::check())
     {
-        Response::redirect('user/login');
+      Response::redirect('user/login');
 		}
-
 		$group_id = Auth::get('group_id','');
 		if ($group_id != 100)
-		{
 			throw new HttpNoAccessException;
-		}
 		$user_id = Auth::get_user_id();
 		$user = Model_User::find($user_id[1]);
 		$this->current_user['name'] = $user->username;

@@ -1,5 +1,5 @@
 {% extends 'layouts/base.twig' %}
-{% block css %}
+{#{% block css %}
   <!-- Morris chart -->
   {{ asset_css('morris.css') }}
   <!-- jvectormap -->
@@ -35,7 +35,7 @@
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 {{ asset_js('dashboard.js') }}
-{% endblock %}
+{% endblock %}#}
 {% block content %}
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -116,7 +116,7 @@
       </div>
       <!-- /.row -->
       <!-- Main row -->
-      <div class="row">
+      {#<div class="row">
         <!-- Left col -->
         <section class="col-lg-7 connectedSortable">
           <!-- Custom tabs (Charts with tabs)-->
@@ -550,7 +550,7 @@
         <!-- right col -->
       </div>
       <!-- /.row (main row) -->
-
+      #}
     </section>
     <!-- /.content -->
 {% endblock %}

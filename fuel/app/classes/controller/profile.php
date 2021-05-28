@@ -9,11 +9,10 @@ class Controller_Profile extends Controller_Base
     }
   }
   
-  public function action_dashboard()
+  public function action_index()
   {
     $view = View::forge('frontend/pages/profile.twig');
     $view->title = "Thông tin cá nhân";
-    $view->bodyClass = 'page home page-template-default';
     return Response::forge($view);
   }
 }

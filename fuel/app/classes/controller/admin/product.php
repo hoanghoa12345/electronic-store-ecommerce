@@ -6,6 +6,9 @@ use Fuel\Core\Response;
 use Parser\View;
 use Fuel\Core\Presenter;
 use Fuel\Core\Validation;
+use Fuel\Core\Session;
+use Fuel\Core\Arr;
+use Fuel\Core\Inflector;
 
 class Controller_Admin_Product extends Controller_Admin
 {
@@ -24,7 +27,7 @@ class Controller_Admin_Product extends Controller_Admin
     $view->brands = Model_Brand::find('all');
     $val = Validation::forge();
     $val->add_field('title','Product title','required');
-    $val->add_field('category_id','Category ID','required');
+    $val->add_field('category_id','Category ID','required|numeric_min[1]');
     $val->add_field('small_description','Small description','required');
     $val->add_field('large_description','Large description','required');
     $val->add_field('regular_price','Regular price','required');
@@ -32,6 +35,8 @@ class Controller_Admin_Product extends Controller_Admin
     $val->add_field('sku','SKU','required');
     $val->add_field('quantity','Quantity','required');
     $val->add_field('brand_id','brand_id','required');
+    $val->add_field('child_cat_id', 'child_cat_id', 'required|numeric_min[1]');
+
     if ($val->run())
     {
         // process your stuff when validation succeeds
@@ -46,7 +51,10 @@ class Controller_Admin_Product extends Controller_Admin
         $product->sku = Input::post('sku');
         $product->quantity = Input::post('quantity');
         $product->brand_id = Input::post('brand_id');
-
+        $product->child_cat_id = Input::post('child_cat_id');
+        $product->status = Input::post('status');
+        $product->colors = Input::post('colors');
+        $product->specifications = Input::post('specifications');
         $product_image = MyUploadFile::product();
         //Debug::dump($my_file);
 
@@ -82,13 +90,28 @@ class Controller_Admin_Product extends Controller_Admin
     try{
       $product = Model_Product::find($id);
       $view->product = $product;
-      $view->categories = Model_Category::find("all");
-      $view->brands = Model_Brand::find("all");
-      $view->other_image = unserialize($product->other_image);
+      $categories = Model_Category::find("all");
+      $brands = Model_Brand::find("all");
+      $view->other_images = unserialize($product->other_image);
     }catch(Exception $e)
     {
       Session::set_flash('error', 'Error' . $e->getMessage());
     }
+    $view->categories = $categories;
+    $view->brands = $brands;
+    $arr_categories = array(-1 => "--Chọn Category--");
+    $arr_brands = array(-1 => "--Chọn brand--");
+    foreach($categories as $item)
+    {
+      Arr::set($arr_categories,$item->id,$item->name);
+    }
+    foreach($brands as $item)
+    {
+      Arr::set($arr_brands,$item->id,$item->name);
+    }
+    $view->options_categories = $arr_categories;
+    $view->options_brands = $arr_brands;
+    
     if(Input::method() == 'POST'){
         $product = Model_Product::find($id);
         $product->title = Input::post('title');
@@ -100,7 +123,30 @@ class Controller_Admin_Product extends Controller_Admin
         $product->discounted_price = Input::post('discounted_price');
         $product->sku = Input::post('sku');
         $product->quantity = Input::post('quantity');
+        $product->other_image = Input::post('other_image');
         $product->brand_id = Input::post('brand_id');
+        $product->child_cat_id = Input::post('child_cat_id');
+        $product->status = Input::post('status');
+        $product->colors = Input::post('colors');
+        $product->specifications = Input::post('specifications');
+
+        $other_image_0 = Input::post('other_image_0');
+        $other_image_1 = Input::post('other_image_1');
+        $other_image_2 = Input::post('other_image_2');
+        $other_image_3 = Input::post('other_image_3');
+        $other_image_4 = Input::post('other_image_4');
+        $other_image_5 = Input::post('other_image_5');
+
+        $product_image_arr = array(
+          $other_image_0,
+          $other_image_1,
+          $other_image_2,
+          $other_image_3,
+          $other_image_4,
+          $other_image_5
+        );
+
+        $product->other_image = serialize($product_image_arr);
         try {
           $product->save();
           Session::set_flash('success', 'Đã cập nhật!');

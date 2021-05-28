@@ -1,17 +1,25 @@
 <?php
 
 use Auth\Auth;
-use Auth\Auth_Login_Ormauth;
-use Fuel\Core\Debug;
 use Fuel\Core\Response;
+use Parser\View;
+use Fuel\Core\Session;
+use Fuel\Core\Input;
+use Fuel\Core\Lang;
 
 class Controller_User extends Controller_Base
 {
+  public function before()
+  {
+    if (Auth::check())
+    {
+      Response::redirect('home');
+    }
+  }
   public function action_login()
   {
     $view = View::forge('frontend/pages/login.twig');
     $view->title = "Đăng nhập hoặc tạo tài khoản";
-    $view->bodyClass = 'home page-template page-template-template-homepage-v3 full-color-background';
     if (Input::method() == 'POST') {
       $email = Input::post('email');
       $password = Input::post('password');
@@ -37,7 +45,6 @@ class Controller_User extends Controller_Base
   {
     $view = View::forge('frontend/pages/register.twig');
     $view->title = "Đăng nhập hoặc tạo tài khoản";
-    $view->bodyClass = 'home page-template page-template-template-homepage-v3 full-color-background';
     $view->post = $_POST;
     if (Input::post()) {
       $username = Input::post('username');
@@ -61,7 +68,7 @@ class Controller_User extends Controller_Base
         {
           Auth::create_user($username,$password,$email,$group,$profile_fields);
           Session::set_flash('success', 'User created!');
-          Response::redirect('user/login');
+          //Response::redirect('user/login');
         }
         catch (Exception $e)
         {
@@ -73,22 +80,4 @@ class Controller_User extends Controller_Base
     return Response::forge($view);
   }
 
-  public function action_profile()
-  {
-    if ( ! Auth::check())
-    {
-        Response::redirect('user/login');
-    }
-    $view = View::forge('frontend/pages/profile.twig');
-    $view->title = "Thông tin cá nhân";
-    $view->bodyClass = 'page home page-template-default';
-    return Response::forge($view);
-  }
-
-  public function action_logout()
-	{
-		Auth::logout();
-		Session::set_flash('success', 'Logged out!');
-		Response::redirect('home');
-	}
 }

@@ -1,15 +1,15 @@
 <?php
 
 use Cart\Cart;
-use Cart\Cart_Item;
-use Fuel\Core\Cookie;
-use Fuel\Core\Debug;
+use Fuel\Core\Response;
+use Fuel\Core\Presenter;
+use Fuel\Core\Input;
 
 class Controller_Product extends Controller_Base
 {
   public function action_detail()
   {
-    return Response::forge(Presenter::forge('frontend/pages/detail.twig'));
+    return Response::forge(Presenter::forge('frontend/pages/productdetail.twig'));
   }
 
   public function action_category()
@@ -19,18 +19,7 @@ class Controller_Product extends Controller_Base
 
   public function action_test($slug)
   {
-    /*$product = DB::query("SELECT * FROM `products` WHERE `slug` = '$slug'")->as_object('Model_Product')->execute();
-    Debug::dump($product);
-    print_r($product->as_array());
-    echo $product[0]->title;*/
-    /*$pro = Model_Product::find('all', array(
-      'where' => array(
-          array('slug', $slug),
-      ),
-      'order_by' => array('created_at' => 'desc'),
-    ));*/
     $pro = Model_Product::query()->where('slug', $slug);
-    //print_r($pro->get_one());
     echo $pro->get_one()->large_description;
   }
 
@@ -60,8 +49,6 @@ class Controller_Product extends Controller_Base
 
   public function get_view_cart()
   {
-    //Debug::dump(Cookie::get('fuel_default_cart'));
-    //$cart = Cookie::get('fuel_default_cart');
     
     $cart = Cart::items();
     //Debug::dump($cart);
@@ -79,15 +66,6 @@ class Controller_Product extends Controller_Base
       echo $item->get_qty() . '<br>';
       echo "--------------";
     }
-  }
-
-  public function action_update_table()
-  {
-    #color varchar ,active int
-    \DBUtil::add_fields('users', array(
-        'surname' => array('constraint' => 100, 'type' => 'varchar'),
-        'twitter_name' => array('constraint' => 100, 'type' => 'varchar'),
-    ));
   }
 
 }

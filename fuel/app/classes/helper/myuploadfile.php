@@ -1,6 +1,7 @@
 <?php
 
 use Fuel\Core\Upload;
+use Fuel\Core\Date;
 
 class MyUploadFile
 {
@@ -63,18 +64,42 @@ class MyUploadFile
     );
     
     Upload::process($config);
-    $return = array();
+
     if (Upload::is_valid())
     {
       Upload::save();
       $product_image = array();
       foreach(Upload::get_files() as $file)
       {
-        $image_path = 'files/'.$folder.'/products/'.$file['saved_as'];
+        $image_path = '/files/'.$folder.'/products/'.$file['saved_as'];
         array_push($product_image,$image_path);
       }
 
     }
     return $product_image;
+  }
+
+  public static function banner()
+  {
+		$folder = Date::forge(time())->format("%m_%Y", true);
+		$config = array(
+			'path' => DOCROOT.'files'.DS.$folder.DS.'banners',
+			'randomize' => true,
+			'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png'),
+    );
+    
+    Upload::process($config);
+    $banner_image = array();
+    if (Upload::is_valid())
+    {
+      Upload::save();
+      foreach(Upload::get_files() as $file)
+      {
+        $image_path = '/files/'.$folder.'/banners/'.$file['saved_as'];
+        array_push($banner_image,$image_path);
+      }
+
+    }
+    return $banner_image;
   }
 }

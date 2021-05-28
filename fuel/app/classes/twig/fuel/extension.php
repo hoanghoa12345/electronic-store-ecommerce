@@ -16,6 +16,12 @@ class Twig_Fuel_Extension extends \Parser\Twig_Fuel_Extension
                 new Twig\TwigFunction('vndFormater', function($num){
                     return number_format($num,0,'.',',') . '₫';
                 }),
+                new Twig\TwigFunction('is_active', function ($router){
+                    return isActive($router);
+                }),
+                new Twig\TwigFunction('appname', function (){
+                    return $_ENV['APP_NAME'];
+                }),
             ]
         );
     }

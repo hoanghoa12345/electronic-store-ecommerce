@@ -1,0 +1,102 @@
+{% extends 'admin/layouts/base.twig' %}
+{% block css %}
+{{ asset_css('dataTables.bootstrap.min.css') }}
+{% endblock %}
+{% block javascript %}
+{{ asset_js('jquery.dataTables.min.js') }}
+{{ asset_js('dataTables.bootstrap.min.js') }}
+<script>
+  $(function () {
+    $('#tableChildCategory').DataTable()
+    $('.btn-warning').click(function() {
+      var id = $(this).data('id')
+      var title = $(this).data('title')
+      $('#child_category_id').val(id)
+      $('#child_category_name').val(title)
+    })
+    $('.btn-danger').click(function() {
+      var prt_id = $(this).data('id')
+      $.post("/admin/childcategory/delete", { child_category_id: prt_id } );
+      alert('Đã xóa mục có ID là:' + prt_id)
+    })
+  })
+</script>
+{% endblock %}
+{% block content %}
+ <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Quản lý {{subtitle}}
+        <small>advanced tables</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="/admin/category/index">{{title}}</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header">
+            <div class="box-title">Category</div>
+          </div>
+          <div class="box-body">
+            <form action="/admin/childcategory/create/{{parent_id}}" method="post">
+              <div class="form-group">
+                <label for="child_category_name">Tên child category* :</label>
+                <input type="text" name="child_category_name" id="child_category_name" required class="form-control">
+                <input type="hidden" name="child_category_id" id="child_category_id">
+              </div>
+              <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Danh sách category #{{parent_id}}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="tableChildCategory" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Slug</th>
+                    <th>Created at</th>
+                    <th>Updated at</th>
+                    <th>Hành động</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for item in child_categories %}
+                    <tr>
+                      <td>{{item.id}}</td>
+                      <td>{{item.name}}</td>
+                      <td>{{item.slug}}</td>
+                      <td>{{item.created_at}}</td>
+                      <td>{{item.updated_at}}</td>
+                      <td>
+                        <div>
+                          <button class="btn btn-warning btn-xs" data-id="{{item.id}}" data-title="{{item.name}}"><i class="fa fa-fw fa-pencil"></i></button>
+                          <button class="btn btn-danger btn-xs" data-id="{{item.id}}"><i class="fa fa-fw fa-trash"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+{% endblock %}

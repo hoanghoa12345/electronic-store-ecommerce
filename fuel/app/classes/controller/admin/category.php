@@ -6,6 +6,10 @@ use Fuel\Core\Debug;
 use Fuel\Core\Input;
 use Fuel\Core\Response;
 use Fuel\Core\Upload;
+use Fuel\Core\Inflector;
+use Parser\View;
+use Fuel\Core\Session;
+use Fuel\Core\Image;
 
 class Controller_Admin_Category extends Controller_Admin
 {
@@ -56,28 +60,45 @@ class Controller_Admin_Category extends Controller_Admin
 
 	public function action_edit($id = null)
 	{
-		$view = View::forge('admin/category/edit.twig');
-		$view->id = $id;
-		if($id != null)
+		$category = Model_Category::find($id);
+		if($category)
 		{
-			try {
-				$category = Model_Category::find($id);
-				$view->cat_name = $category->name;
-			} catch (Exception $e) {
-				Session::set_flash('error', $e->getMessage());
-			}
+			$view = View::forge('admin/category/edit.twig');
+			$view->title = "Quản lý category";
+			$view->subtitle = "Category";
+			$view->category = $category;
+
 			if(Input::method() == 'POST'){
+				$category->name = Input::post('category_name');
+				$category->slug = Input::post('category_slug');
+				$category_image_arr = MyUploadFile::banner();
+				if(!empty($category_image_arr))
+					$category->image = $category_image_arr[0];
 				try {
-					$category = Model_Category::find($id);
-					$category->name = Input::post('category_name');
-					$category->slug = Inflector::friendly_title(Input::post('category_name'), '-', true);
+
 					$category->save();
 					Session::set_flash('success', 'Đã sửa category #' . $id);
 					Response::redirect('admin/category/index');
+
 				} catch (Exception $e) {
 					Session::set_flash('error', 'Chưa sửa được category');
 				}
 			}
+		}else{
+			Session::set_flash('Can not find category');
+			Response::redirect('/admin/category/index');
+		}
+		
+		$view->id = $id;
+		if($id != null)
+		{
+			try {
+				#$category = ;
+				$view->category = $category;
+			} catch (Exception $e) {
+				
+			}
+			
 		}
 		return Response::forge($view);
 	}

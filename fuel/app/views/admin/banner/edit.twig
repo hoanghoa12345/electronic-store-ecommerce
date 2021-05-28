@@ -1,0 +1,74 @@
+{% extends 'admin/layouts/base.twig' %}
+{% block css %}
+
+{% endblock %}
+{% block javascript %}
+
+{% endblock %}
+{% block content %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        {{title}}
+        <small>advanced tables</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="/admin/brand/index">{{subtitle}}</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Edit Banner</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <form role="form" action="" method="post" enctype="multipart/form-data">
+
+
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="title" value="{{banner.title}}">
+                </div>
+                <!-- text input -->
+                <div class="form-group">
+                  <label>SubTitle</label>
+                  <input type="text" class="form-control" name="subtitle" value="{{banner.subtitle}}">
+                </div>
+
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Link</label>
+                  <input type="text" class="form-control" name="link" value="{{banner.link}}">
+                </div>
+
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Image</label>
+                  <input type="file" class="form-control" name="image">
+                  <img class="img-fluid" src="{{banner.image}}" alt="{{banner.title}}" height="125">
+                  <a href="/admin/banner/delete_image?{{banner.image}}"><i class="fa fa-fw fa-close"></i></a>
+                </div>
+
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Type</label>
+                  <input type="text" class="form-control" name="type" value="{{banner.type}}">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update</button>
+
+              </form>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}

@@ -35,23 +35,23 @@
           </span></a>
           <ul class="treeview-menu">
             <li><a href="{{ url('admin/users/add') }}"><i class="fa fa-circle-o"></i>Thêm người dùng</a></li>
-            <li><a href="{{ url('admin/users') }}"><i class="fa fa-circle-o"></i>Quản lý người dùng</a></li>
+            <li class="{{ is_active('users') }}"><a href="{{ url('admin/users') }}"><i class="fa fa-circle-o"></i>Quản lý người dùng</a></li>
           </ul>
         </li>
 
-        <li class="treeview"><a href="#"><i class="fa fa-files-o"></i><span>Nhóm</span>
+        <li class="treeview"><a href="#"><i class="fa fa-files-o"></i><span>Banner</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span></a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Thêm nhóm</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Quản lý nhóm</a></li>
+            <li><a href="/admin/banner/index"><i class="fa fa-circle-o"></i>TopCarousel</a></li>
+            <li><a href="/admin/banner/three_image"><i class="fa fa-circle-o"></i>Image TopBar</a></li>
           </ul>
         </li>
 
-        <li><a href="{{url('admin/brand/index')}}"><i class="glyphicon glyphicon-tags"></i><span>Thương hiệu</span></a></li>
+        <li class="{{ is_active('brand') }}"><a href="{{url('admin/brand/index')}}"><i class="glyphicon glyphicon-tags"></i><span>Thương hiệu</span></a></li>
 
-        <li><a href="{{ url('admin/category') }}"><i class="fa fa-files-o"></i><span>Danh mục</span></a></li>
+        <li class="{{ is_active('category') }}"><a href="{{ url('admin/category') }}"><i class="fa fa-files-o"></i><span>Danh mục</span></a></li>
 
         <li class="treeview"><a href="#"><i class="fa fa-cube"></i><span>Sản phẩm</span>
           <span class="pull-right-container">
@@ -59,7 +59,7 @@
           </span></a>
           <ul class="treeview-menu">
             <li><a href="{{ url('admin/product/create')}}"><i class="fa fa-circle-o"></i>Thêm sản phẩm</a></li>
-            <li><a href="{{ url('admin/product/index')}}"><i class="fa fa-circle-o"></i>Quản lý sản phẩm</a></li>
+            <li class="{{ is_active('product') }}"><a href="{{ url('admin/product/index')}}"><i class="fa fa-circle-o"></i>Quản lý sản phẩm</a></li>
           </ul>
         </li>
 
