@@ -23,7 +23,8 @@ class Controller_Admin_Brand extends Controller_Admin
 		if (Input::method() == 'POST') {
 			$brand = Model_Brand::forge(array(
 				'name'  => Input::post('brand_name'),
-				'slug'  => Inflector::friendly_title(Input::post('brand_name'), '-', true)
+				'slug'  => to_slug(Input::post('brand_name')),
+				'image' => MyUploadFile::brand()
 			));
 
 			if ($brand and $brand->save()) {
@@ -33,6 +34,27 @@ class Controller_Admin_Brand extends Controller_Admin
 				Session::set_flash('error', 'Chưa thêm được thương hiệu');
 			}
 		} 
+		return Response::forge($view);
+	}
+	
+	public function action_edit($id)
+	{
+		$view = View::forge('admin/brand/edit.twig');
+		$brand = Model_Brand::find($id);
+		if (Input::method() == 'POST') {
+
+			$brand->name  = Input::post('brand_name');
+			$brand->slug  = to_slug(Input::post('brand_name'));
+			$brand->image = MyUploadFile::brand();
+
+			if ($brand->save()) {
+				Session::set_flash('success', 'Đã cập nhật brand #' . $brand->id);
+				Response::redirect('admin/brand/index');
+			} else {
+				Session::set_flash('error', 'Chưa thêm được thương hiệu');
+			}
+		}
+		$view->brand = $brand;
 		return Response::forge($view);
   }
   

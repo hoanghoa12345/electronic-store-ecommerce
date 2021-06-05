@@ -12,39 +12,46 @@ class Controller_Product extends Controller_Base
     return Response::forge(Presenter::forge('frontend/pages/productdetail.twig'));
   }
 
-  public function action_category()
+  public function action_search()
   {
-    return Response::forge(Presenter::forge('frontend/pages/category.twig'));
+    if(Input::is_ajax()):
+    $query = $_GET['query'];
+    $results = Model_Product::query()->where('title', 'like', "%$query%")->limit(5)->get();
+    $output = '';
+    if(count($results)>0){
+      foreach($results as $product)
+      {
+        $price = number_format($product->regular_price,0,'.',',');
+        $output .= "\n<li>\n\t<a href=\"/products/$product->slug\">
+          <h3> $product->title </h3>
+          <span>$price&#8363;</span>
+        </a>
+      </li>";
+      }
+    }else{
+      $output ="Không tìm thấy sản phẩm nào";
+    }
+    echo $output;
+  endif;
   }
 
-  public function action_test($slug)
+  public function action_addToCart()
   {
-    $pro = Model_Product::query()->where('slug', $slug);
-    echo $pro->get_one()->large_description;
-  }
+    if(Input::is_ajax())
+    {
+      $product_id = Input::post('product_id');
+      $product_quantity = Input::post('quantity');
+      $product = Model_Product::find($product_id);
 
-  public function action_add_to_cart()
-  {
-    //Debug::dump($_POST);
-    $attribute_pa_color = Input::post('attribute_pa_color');
-    $quantity = Input::post('quantity');
-    $add_to_cart = Input::post('add_to_cart');
-    $product_id = Input::post('product_id');
-    $variation_id = Input::post('variation_id');
 
-    $product = Model_Product::find($product_id);
-
-    $rowid = Cart::add(array(
-      'name' => $product->title,
-      'image' => $product->primary_image,
-      'id' => $product_id,
-      'qty' => $quantity,
-      'price' => $product->discounted_price,
-    ));
-
-    //echo $rowid;
-
-    return Response::redirect('shop');
+      Cart::add(array(
+        'name'  => $product->title,
+        'id'    => $product->id,
+        'qty'   => $product_quantity,
+        'price' => $product->regular_price,
+      ));
+      echo "Add to cart";
+    }
   }
 
   public function get_view_cart()

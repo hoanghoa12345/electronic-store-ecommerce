@@ -2,6 +2,7 @@
 
 use Fuel\Core\Debug;
 use Fuel\Core\Presenter;
+use Fuel\Core\DB;
 class Presenter_Frontend_Pages_Productdetail extends Presenter
 {
 	public function view()
@@ -13,8 +14,10 @@ class Presenter_Frontend_Pages_Productdetail extends Presenter
     $product->category = Model_Category::find($product->category_id,array('select' => array('id', 'name')));
     $product->brand = Model_Brand::find($product->brand_id,array('select' => array('id', 'name')));
     $product->child_category = Model_ChildCategory::query()->where('id', '=', $product->child_cat_id)->get_one();
+    $related_products = Model_Product::query()->order_by(DB::expr('RAND()'))->limit(4)->get();
     $this->title = $product->title;
     $this->product = $product;
-    $this->product_image = unserialize($this->product->other_image);
+    $this->product_images = unserialize($this->product->other_image);
+    $this->related_products = $related_products;
 	}
 }

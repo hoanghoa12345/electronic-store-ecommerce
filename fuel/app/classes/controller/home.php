@@ -20,7 +20,10 @@ class Controller_Home extends Controller_Base
           array('type', 3),
       )));
 
-    //$view->top_selling = Model_Product::find('all', array('rows_limit' => 8));
+    $view->top_sellings = Model_Product::find('all', array('rows_limit' => 8));
+    $view->featured = Model_Product::find('all', array('order_by' => array('created_at' => 'desc', 'category_id' => 'asc')), array('row_limit' => 4));
+    $view->brands = Model_Brand::find('all');
     return Response::forge($view);
   }
+
 }

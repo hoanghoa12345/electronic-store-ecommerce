@@ -2,7 +2,7 @@
 
 use Fuel\Core\Upload;
 use Fuel\Core\Date;
-
+use Fuel\Core\Image;
 class MyUploadFile
 {
   public static function doUpload(): array
@@ -32,8 +32,8 @@ class MyUploadFile
 		));
 		$folder = Date::forge(time())->format("%m_%Y", true);
     // Upload an image and pass it directly into the Image::load method.
-    $path = DOCROOT.'files'.DS.$folder.DS.'avatar';
-    $tmp_path = DOCROOT.'files/tmp'.DS.$folder;
+    $path = DOCROOT.'files'.DS.$folder.DS.'avatars';
+    $tmp_path = DOCROOT.'files/tmp'.DS.$folder.DS.'avatars';
 		Upload::process(array(
       'path' => $tmp_path,
 			'randomize' => true,
@@ -49,7 +49,7 @@ class MyUploadFile
 			$image->load($tmp_path.DS.$data['saved_as'], false, $data['extension'])
 					->crop_resize(200, 200)
           ->save($path.DS.$data['saved_as']);
-      return $data['saved_as'];
+      return '/files/'.$folder.'/avatars/'.$data['saved_as'];
     }
     return null;
   }
@@ -101,5 +101,29 @@ class MyUploadFile
 
     }
     return $banner_image;
+  }
+
+  public static function brand()
+  {
+		$folder = Date::forge(time())->format("%m_%Y", true);
+		$config = array(
+			'path' => DOCROOT.'files'.DS.$folder.DS.'brands',
+			'randomize' => true,
+			'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png'),
+    );
+    
+    Upload::process($config);
+    $brand_image = array();
+    if (Upload::is_valid())
+    {
+      Upload::save();
+      foreach(Upload::get_files() as $file)
+      {
+        $image_path = '/files/'.$folder.'/brands/'.$file['saved_as'];
+        array_push($brand_image,$image_path);
+      }
+
+    }
+    return $brand_image;
   }
 }

@@ -7,7 +7,7 @@ class Presenter_Frontend_Pages_Productlist extends Presenter
 {
 	public function view()
 	{
-    $this->name = $this->request()->param('name', 'null');
+    $this->name = $this->request()->param('slug', 'null');
     
     $category = Model_Category::find('first', array(
       'where' => array(

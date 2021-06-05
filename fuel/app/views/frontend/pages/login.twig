@@ -30,31 +30,77 @@
 
   $("#login").validate({
     rules: {
-      email_in: "required",
-      password_in: "required",
-      email_in: {
+      email: "required",
+      password: "required",
+      email: {
         required: true,
         email: true
       },
-      password_in: {
+      password: {
         required: true,
         minlength: 5
       },
     },
 
     messages: {
-      email_in: "Please enter your email",
-      password_in: {
-        required: "Please provide a password",
-        minlength: "Your password must be at least 5 characters long"
-      },
-      email: "Please enter a valid email address"
+      email: {
+				required: "Vui lòng nhập email",
+      	email: "Vui lòng nhập đúng định dạng email"
+			},
+      password: {
+        required: "Vui lòng cung cấp mật khẩu",
+        minlength: "Mật khẩu phải từ 5 ký tự trở lên"
+      }
     },
 
     submitHandler: function(form) {
       form.submit();
     }
- });
+ })
+
+
+ $("#register").validate({
+    rules: {
+			username: "required",
+      email: "required",
+      email: {
+        required: true,
+        email: true
+      },
+      password: {
+        required: true,
+        minlength: 5
+      },
+			confirm_password: {
+        required: true,
+        minlength: 5,
+				equalTo: "password"
+      },
+			accept: "required"
+    },
+
+    messages: {
+			username: "Vui lòng nhập username",
+      email: {
+				required: "Vui lòng nhập email",
+				email: "Vui lòng nhập đúng định dạng email"
+			},
+      password: {
+        required: "Vui lòng cung cấp mật khẩu",
+        minlength: "Mật khẩu phải từ 5 ký tự trở lên"
+      },
+			confirm_password: {
+				required: "Vui lòng cung cấp mật khẩu",
+        minlength: "Mật khẩu phải từ 5 ký tự trở lên",
+				equalTo: "Mật khẩu không khớp với mật khẩu đã nhập"
+			},
+			accept: "Vui lòng đọc và đồng ý với điều khoản dịch vụ"
+    },
+
+    submitHandler: function(form) {
+      form.submit();
+    }
+ })
 });
 </script>
 {% endblock %}
@@ -65,28 +111,19 @@
 		<div class="page_header">
 			<div class="breadcrumbs">
 				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Category</a></li>
-					<li>Tài khoản</li>
+					<li><a href="#">Trang chủ</a></li>
+					<li><a href="#">Tài khoản</a></li>
+					<li>Tạo tài khoản</li>
 				</ul>
 		</div>
-		<h1>Sign In or Create an Account</h1>
+		<h1>Đăng nhập hoặc tạo tài khoản</h1>
 	</div>
 	<!-- /page_header -->
 			<div class="row justify-content-center">
 			<div class="col-xl-6 col-lg-6 col-md-8">
 				<div class="box_account">
-					<h3 class="client">Already Client</h3>
+					<h3 class="client">Đăng nhập</h3>
 					<div class="form_container">
-						{#<div class="row no-gutters">
-							<div class="col-lg-6 pr-lg-1">
-								<a href="#0" class="social_bt facebook">Login with Facebook</a>
-							</div>
-							<div class="col-lg-6 pl-lg-1">
-								<a href="#0" class="social_bt google">Login with Google</a>
-							</div>
-						</div>
-						<div class="divider"><span>Or</span></div>#}
             <form action="/user/login" method="post" id="login" name="login">
 						<div class="form-group">
 							<input type="email" class="form-control" name="email" id="email_in" placeholder="Email*">
@@ -96,22 +133,26 @@
 						</div>
 						<div class="clearfix add_bottom_15">
 							<div class="checkboxes float-left">
-								<label class="container_check">Remember me
+								<label class="container_check">Ghi nhớ
 									<input type="checkbox" name="rememberCheckbox">
 									<span class="checkmark"></span>
 								</label>
 							</div>
-							<div class="float-right"><a id="forgot" href="/user/reset-password">Lost Password?</a></div>
+							<div class="float-right"><a id="forgot" href="javascript:void(0)">Quên mật khẩu?</a></div>
 						</div>
 						<div class="text-center"><input type="submit" value="Log In" class="btn_1 full-width"></div>
+						</form>
+
 						<div id="forgot_pw">
+							<h3>Khôi phục mật khẩu</h3>
+							<form action="/user/resetPassword" method="POST">
 							<div class="form-group">
 								<input type="email" class="form-control" name="email_forgot" id="email_forgot" placeholder="Type your email">
 							</div>
 							<p>A new password will be sent shortly.</p>
 							<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
+							</form>
 						</div>
-            </form>
 					</div>
 					<!-- /form_container -->
 				</div>
@@ -135,8 +176,8 @@
 			</div>
 			<div class="col-xl-6 col-lg-6 col-md-8">
 				<div class="box_account">
-					<h3 class="new_client">New Client</h3> <small class="float-right pt-2">* Required Fields</small>
-					<form action="/user/register" method="post">
+					<h3 class="new_client">Đăng ký</h3> <small class="float-right pt-2">* Required Fields</small>
+					<form action="/user/register" method="post" id="register" name="register">
 					<div class="form_container">
 						<div class="form-group">
 							<input type="text" class="form-control" name="username" id="username_2" placeholder="Username*">
@@ -153,7 +194,7 @@
 						<hr>
 						<div class="form-group">
 							<label class="container_check">Accept <a href="#0">Terms and conditions</a>
-								<input type="checkbox">
+								<input type="checkbox" name="accept">
 								<span class="checkmark"></span>
 							</label>
 						</div>

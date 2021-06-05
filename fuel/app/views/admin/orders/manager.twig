@@ -1,6 +1,14 @@
 {% extends 'admin/layouts/base.twig' %}
 {% block css %}
 {{ asset_css('dataTables.bootstrap.min.css') }}
+<style>
+.fix_cover {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    object-position: 20% 10%;
+  }
+</style>
 {% endblock %}
 {% block javascript %}
 {{ asset_js('jquery.dataTables.min.js') }}
@@ -9,15 +17,15 @@
   $(function () {
     $('#example1').DataTable()
   })
-  $(document).on("click", ".deletebrand", function (e) {
+  $(document).on("click", ".deleteCategory", function (e) {
 
     e.preventDefault();
 
     var _self = $(this);
     var baseUrl = "{{base_url()}}";
 
-    var brandId = _self.data('id');
-    $("#deleteBtn").attr("href",baseUrl + "admin/brand/delete/" + brandId);
+    var categoryId = _self.data('id');
+    $("#deleteBtn").attr("href",baseUrl + "admin/category/delete/" + categoryId);
 
     $(_self.attr('href')).modal('show');
   });
@@ -28,11 +36,11 @@
     <section class="content-header">
       <h1>
         {{title}}
-        <small>advanced tables</small>
+        <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="/admin/brand/index">{{subtitle}}</li>
+        <li class="javascript:void(0)">{{subtitle}}</li>
       </ol>
     </section>
 
@@ -40,49 +48,41 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-        <div class="box">
-          <div class="box-header">
-            <div class="box-title">brand</div>
-          </div>
-          <div class="box-body">
-            <button class="btn btn-primary">Thêm brand</button>
-            <button class="btn btn-danger">Xóa brand</button>
-            <form action="{{ url("admin/brand/create") }}" method="post" enctype="multipart/form-data">
-              <div class="form-group">
-                <label for="brand_name">Tên brand *</label>
-                <input type="text" class="form-control" name="brand_name" id="brand_name" placeholder="Nhập brand name" required>
-                <input type="file" name="image" id="image" class="form-control">
-              </div>
-              <button type="submit" class="btn btn-primary">Create</button>
-            </form>
-          </div>
-        </div>
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">{{subtitle}}</h3>
+              <h3 class="box-title">{{title}}</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Tên {{subtitle}}</th>
-                  <th>Slug</th>
-                  <th>Hành động</th>
+                  <th>Mã đơn hàng</th>
+                  <th>ID người dùng</th>
+                  <th>Tổng tiền hàng</th>
+                  <th>ĐV vận chuyển</th>
+                  <th>Tổng đơn hàng</th>
+                  <th>Số lượng SP</th>
+                  <th>PT Thanh toán</th>
+                  <th>Trạng thái</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for brand in brands %}
+                {% for item in orders %}
                 <tr>
-                  <td>{{ brand.id }}</td>
-                  <td>{{ brand.name }}</td>
-                  <td> <img src="{{ brand.image }}" alt="" class="img-thumb" height="80"> </td>
+                  <td>{{ item.order_number }}</td>
+                  <td>{{ item.user_id }}</td>
+                  <td>{{ item.sub_total }}</td>
+                  <td>{{ item.shipping_id }}</td>
+                  <td>{{ item.total_amount }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ item.payment_method }}</td>
+                  <td>{{ item.status }}</td>
                   <td>
                     <div>
-                      <a href="{{base_url()}}admin/brand/view/{{brand.id}}" class="btn btn-primary btn-xs">Xem</a>
-                      <a href="{{base_url()}}admin/brand/edit/{{brand.id}}" class="btn btn-warning btn-xs">Sửa</a>
-                      <a href="javascript:void(0)" class="deletebrand btn btn-danger btn-xs" data-id="{{brand.id}}" data-toggle="modal" data-target="#modal-delete">Xóa</a>
+                      <a href="{{base_url()}}admin/childcategory/view/{{category.id}}" class="btn btn-primary btn-xs">Xem</a>
+                      <a href="{{base_url()}}admin/category/edit/{{category.id}}" class="btn btn-warning btn-xs">Sửa</a>
+                      <a href="javascript:void(0)" class="deleteCategory btn btn-danger btn-xs" data-id="{{category.id}}" data-toggle="modal" data-target="#modal-delete">Xóa</a>
                     </div>
                   </td>
                 </tr>

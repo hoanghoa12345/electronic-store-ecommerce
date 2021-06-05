@@ -11,6 +11,7 @@ class Controller_User extends Controller_Base
 {
   public function before()
   {
+    parent::before();
     if (Auth::check())
     {
       Response::redirect('home');
@@ -80,4 +81,13 @@ class Controller_User extends Controller_Base
     return Response::forge($view);
   }
 
+  public function action_resetPassword()
+  {
+    $password = "YNcdskl123";
+    if(Input::method() == 'POST')
+    {
+      $email = Input::post('email_forgot');
+    }
+    echo "Your email is $email - New password is $password";
+  }
 }

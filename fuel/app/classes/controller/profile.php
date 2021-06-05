@@ -3,6 +3,7 @@ class Controller_Profile extends Controller_Base
 {
   public function before()
 	{
+    
 		if ( ! Auth::check())
     {
         Response::redirect('user/login');

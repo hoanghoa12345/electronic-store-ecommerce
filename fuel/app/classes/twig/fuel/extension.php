@@ -22,6 +22,9 @@ class Twig_Fuel_Extension extends \Parser\Twig_Fuel_Extension
                 new Twig\TwigFunction('appname', function (){
                     return $_ENV['APP_NAME'];
                 }),
+                new Twig\TwigFunction('is_admin', function (){
+                    return isAdmin();
+                }),
             ]
         );
     }

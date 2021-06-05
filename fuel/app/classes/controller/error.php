@@ -1,7 +1,7 @@
 <?php
 
 use Fuel\Core\Response;
-
+use Fuel\Core\Presenter;
 class Controller_Error extends Controller_Base {
 
   public function action_404()
@@ -11,7 +11,7 @@ class Controller_Error extends Controller_Base {
 
 	public function action_403()
 	{
-		#echo "Không có quyền truy cập trang này!";
-		return Response::forge(View::forge('errors/403.html'),403);
+		echo "Không có quyền truy cập trang này!";
+		return Response::forge(Presenter::forge('errors/403.html'),403);
 	}
 }

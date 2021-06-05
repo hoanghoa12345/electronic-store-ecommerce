@@ -31,3 +31,5 @@ desktop.ini
 /fuel/app/logs/*/*/*
 /fuel/app/cache/*/*
 /fuel/app/config/crypt.php
+electronic-store-ecommerce-db_2021-06-01.sql
+electronic-store-ecommerce.rar

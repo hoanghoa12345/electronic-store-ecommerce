@@ -71,6 +71,30 @@
         {% if session_get_flash('error') %}
           toastr["error"]("{{ session_get_flash('error') }}", "Lỗi")
         {% endif %}
+
+
+        var timer, delay = 1000;
+
+        $('#query').bind('change keyup', function() {
+          var _this = $(this);
+          clearTimeout(timer)
+          timer = setTimeout(function() {
+            console.log(_this.val())
+            if(_this.val().length > 0){
+            $.ajax({
+              url:"/product/search?query=" + _this.val(),
+              type:"GET",
+              success:function(response){
+                $('#SearchAutoComplete').show()
+                $('.ajaxAutoComplete').html(response)
+                console.log(response)
+              }
+            })
+            }else{
+              $('#SearchAutoComplete').hide()
+            }
+          }, delay)
+        })
       })
     </script>
 	<!-- SPECIFIC SCRIPTS -->

@@ -42,7 +42,7 @@ class Controller_Admin_Product extends Controller_Admin
         // process your stuff when validation succeeds
         $product = new Model_Product();
         $product->title = Input::post('title');
-        $product->slug = Inflector::friendly_title(Input::post('title'), '-', true);
+        $product->slug = to_slug(Input::post('title'));
         $product->category_id = Input::post('category_id');
         $product->small_description = Input::post('small_description');
         $product->large_description = Input::post('large_description');
@@ -111,6 +111,7 @@ class Controller_Admin_Product extends Controller_Admin
     }
     $view->options_categories = $arr_categories;
     $view->options_brands = $arr_brands;
+    //$view->child_category = Model_ChildCategory::find($product->child_cat_id);
     
     if(Input::method() == 'POST'){
         $product = Model_Product::find($id);
@@ -130,7 +131,7 @@ class Controller_Admin_Product extends Controller_Admin
         $product->colors = Input::post('colors');
         $product->specifications = Input::post('specifications');
 
-        $other_image_0 = Input::post('other_image_0');
+        /*$other_image_0 = Input::post('other_image_0');
         $other_image_1 = Input::post('other_image_1');
         $other_image_2 = Input::post('other_image_2');
         $other_image_3 = Input::post('other_image_3');
@@ -144,12 +145,16 @@ class Controller_Admin_Product extends Controller_Admin
           $other_image_3,
           $other_image_4,
           $other_image_5
-        );
+        );*/
 
-        $product->other_image = serialize($product_image_arr);
+        $product_image = MyUploadFile::product();
+
+        $product->primary_image = $product_image[0];
+        $product->other_image = serialize($product_image);
         try {
           $product->save();
           Session::set_flash('success', 'Đã cập nhật!');
+          Response::redirect('admin/product/index');
         }catch(Exception $e)
         {
           Session::set_flash('error', 'Error' . $e->getMessage());

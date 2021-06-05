@@ -15,8 +15,12 @@ class Model_User extends \Orm\Model
 			"label" => "Password",
 			"data_type" => "varchar",
 		),
-		"name" => array(
-			"label" => "Name",
+		"firstname" => array(
+			"label" => "First Name",
+			"data_type" => "varchar",
+		),
+		"lastname" => array(
+			"label" => "Last Name",
 			"data_type" => "varchar",
 		),
 		"group_id" => array(
@@ -62,6 +66,10 @@ class Model_User extends \Orm\Model
 		"avatar" => array(
 			"label" => "Avatar",
 			"data_type" => "varchar",
+		),
+		"address" => array(
+			"label" => "Address",
+			"data_type" => "longtext",
 		),
 		"created_at" => array(
 			"label" => "Created at",

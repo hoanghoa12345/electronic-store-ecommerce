@@ -3,7 +3,7 @@
 <style>
   .fix_cover {
     width: 200px;
-    height: 200px;
+    height: auto;
     object-fit: cover;
     object-position: 20% 10%;
   }
@@ -17,7 +17,7 @@
     <section class="content-header">
       <h1>
         {{title}}
-        <small>advanced tables</small>
+        <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -47,13 +47,13 @@
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <tbody><tr>
-                  <th>ID</th>
-                  <th>Title</th>
-                  <th>Subtitle</th>
-                  <th>Link</th>
-                  <th>Image</th>
-                  <th>Type</th>
-                  <td>Action</td>
+                  <th style="width:50px">ID</th>
+                  <th style="width:200px">Title</th>
+                  <th style="width:150px">Subtitle</th>
+                  <th style="width:150px">Link</th>
+                  <th style="width:200px">Image</th>
+                  <th style="width:80px">Type</th>
+                  <th>Action</th>
                 </tr>
                 {% for banner in banners %}
                   <tr>

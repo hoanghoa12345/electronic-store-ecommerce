@@ -28,8 +28,11 @@ class Controller_Category extends Controller_Base
 
   public function action_child()
   {
-    $category = $this->param('category', 'null');
+    /*$category = $this->param('slug', 'null');
     $child = $this->param('child', 'null');
-    echo $category . $child;
+    echo $category .'<br>'. $child;
+
+    $view = View::forge('frontend/pages/')*/
+    return Response::forge(Presenter::forge('frontend/pages/productChildList.twig'));
   }
 }

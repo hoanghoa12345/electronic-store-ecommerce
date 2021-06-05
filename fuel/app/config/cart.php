@@ -25,12 +25,12 @@ return array(
 	'default_cart'      => 'default',
 
 	'default' => array(
-		'tax'           => 0.19,
+		'tax'           => 0.0,
 		'name'          => 'Cart',
 		'dec_point'     => '.',
 		'thousands_sep' => ',',
 		'driver'        => 'cookie',
-		'cookie_expire' => 7200,
+		'cookie_expire' => 86400*7,
 		'auto_save'     => true,
 	),
 

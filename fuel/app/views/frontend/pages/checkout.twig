@@ -1,0 +1,219 @@
+{% extends "frontend/layouts/base.twig" %}
+{% block css %}
+<link href="/assets/css/checkout.css" rel="stylesheet">
+{% endblock %}
+{% block javascript %}
+<script>
+    	// Other address Panel
+		$('#other_addr input').on("change", function (){
+	        if(this.checked)
+	            $('#other_addr_c').fadeIn('fast');
+	        else
+	            $('#other_addr_c').fadeOut('fast');
+	    });
+	</script>
+{% endblock %}
+{% block content %}
+<main class="bg_gray">
+	
+		
+	<div class="container margin_30">
+		<div class="page_header">
+			<div class="breadcrumbs">
+				<ul>
+					<li><a href="#">Trang chủ</a></li>
+					<li><a href="#">Đơn hàng</a></li>
+					<li>Thanh toán</li>
+				</ul>
+		</div>
+		<h1>Thông tin đặt hàng</h1>
+			
+	</div>
+	<!-- /page_header -->
+			<div class="row">
+				<div class="col-lg-4 col-md-6">
+					<div class="step first">
+						<h3>1. Thông tin giao hàng</h3>
+						<p>Tên: {{user.firstname}} {{user.lastname}}</p>
+						<p>Email: {{user.email}}</p>
+						<p>Số điện thoại: {{user.phone_number}}</p>
+						<p>Địa chỉ: {{user.address}}</p>
+					<form action="" method="post">
+							<hr>
+							<div class="row no-gutters">
+								<div class="col-6 form-group pr-1">
+									<input type="text" class="form-control" placeholder="Name">
+								</div>
+								<div class="col-6 form-group pl-1">
+									<input type="text" class="form-control" placeholder="Last Name">
+								</div>
+							</div>
+							<!-- /row -->
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Full Address">
+							</div>
+							<div class="row no-gutters">
+								<div class="col-6 form-group pr-1">
+									<input type="text" class="form-control" placeholder="City">
+								</div>
+								<div class="col-6 form-group pl-1">
+									<input type="text" class="form-control" placeholder="Postal code">
+								</div>
+							</div>
+							<!-- /row -->
+							<div class="row no-gutters">
+								<div class="col-md-12 form-group">
+									<div class="custom-select-form">
+										<select class="wide add_bottom_15" name="country" id="country">
+											<option value="" selected>Country</option>
+											<option value="Europe">Europe</option>
+											<option value="United states">United states</option>
+											<option value="Asia">Asia</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<!-- /row -->
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Telephone">
+							</div>
+							<hr>
+							<div class="form-group">
+								<label class="container_check" id="other_addr">Other billing address
+								  <input type="checkbox">
+								  <span class="checkmark"></span>
+								</label>
+							</div>
+							<div id="other_addr_c" class="pt-2">
+							<div class="row no-gutters">
+								<div class="col-6 form-group pr-1">
+									<input type="text" class="form-control" placeholder="Name">
+								</div>
+								<div class="col-6 form-group pl-1">
+									<input type="text" class="form-control" placeholder="Last Name">
+								</div>
+							</div>
+							<!-- /row -->
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Full Address">
+							</div>
+							<div class="row no-gutters">
+								<div class="col-6 form-group pr-1">
+									<input type="text" class="form-control" placeholder="City">
+								</div>
+								<div class="col-6 form-group pl-1">
+									<input type="text" class="form-control" placeholder="Postal code">
+								</div>
+							</div>
+							<!-- /row -->
+							<div class="row no-gutters">
+								<div class="col-md-12 form-group">
+									<div class="custom-select-form">
+										<select class="wide add_bottom_15" name="country" id="country_2">
+											<option value="" selected>Country</option>
+											<option value="Europe">Europe</option>
+											<option value="United states">United states</option>
+											<option value="Asia">Asia</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<!-- /row -->
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Telephone">
+							</div>
+							</div>
+							<!-- /other_addr_c -->
+							<hr>
+							</form>
+					</div>
+					<!-- /step -->
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="step middle payments">
+						<h3>2. Thanh toán và vận chuyển</h3>
+							<ul>
+								<li>
+									<label class="container_radio">Credit Card<a href="#0" class="info" data-toggle="modal" data-target="#payments_method"></a>
+										<input type="radio" name="payment" checked>
+										<span class="checkmark"></span>
+									</label>
+								</li>
+								<li>
+									<label class="container_radio">Paypal<a href="#0" class="info" data-toggle="modal" data-target="#payments_method"></a>
+										<input type="radio" name="payment">
+										<span class="checkmark"></span>
+									</label>
+								</li>
+								<li>
+									<label class="container_radio">Cash on delivery<a href="#0" class="info" data-toggle="modal" data-target="#payments_method"></a>
+										<input type="radio" name="payment">
+										<span class="checkmark"></span>
+									</label>
+								</li>
+								<li>
+									<label class="container_radio">Bank Transfer<a href="#0" class="info" data-toggle="modal" data-target="#payments_method"></a>
+										<input type="radio" name="payment">
+										<span class="checkmark"></span>
+									</label>
+								</li>
+							</ul>
+							<div class="payment_info d-none d-sm-block"><figure><img src="/assets/img/cards_all.svg" alt=""></figure>	<p>Sensibus reformidans interpretaris sit ne, nec errem nostrum et, te nec meliore philosophia. At vix quidam periculis. Solet tritani ad pri, no iisque definitiones sea.</p></div>
+							
+							<h6 class="pb-2">Phương thức vận chuyển</h6>
+							
+						
+							<ul>
+								<li>
+									<label class="container_radio">Standard shipping<a href="#0" class="info" data-toggle="modal" data-target="#payments_method"></a>
+										<input type="radio" name="shipping" checked>
+										<span class="checkmark"></span>
+									</label>
+								</li>
+								<li>
+									<label class="container_radio">Express shipping<a href="#0" class="info" data-toggle="modal" data-target="#payments_method"></a>
+										<input type="radio" name="shipping">
+										<span class="checkmark"></span>
+									</label>
+								</li>
+							</ul>
+						
+					</div>
+					<!-- /step -->
+					
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="step last">
+						<h3>3. Danh sách sản phẩm</h3>
+					<div class="box_general summary">
+						{% for cart_item in cart_items %}
+						<ul>
+							<li class="clearfix"><em>{{cart_item.qty}}x {{cart_item.name}}</em>  <span>{{vndFormater(cart_item.price)}}</span></li>
+						</ul>
+						{% endfor %}
+						<ul>
+							<li class="clearfix"><em><strong>Subtotal</strong></em>  <span>{{ vndFormater(sub_total) }}</span></li>
+							<li class="clearfix"><em><strong>Shipping</strong></em> <span>{{ shipping }}&#8363;</span></li>
+							
+						</ul>
+						<div class="total clearfix">TOTAL <span>{{total_cart}}&#8363;</span></div>
+						<div class="form-group">
+								<label class="container_check">Register to the Newsletter.
+								  <input type="checkbox" checked>
+								  <span class="checkmark"></span>
+								</label>
+							</div>
+						
+						<a href="/checkout/confirm" class="btn_1 full-width">Confirm and Pay</a>
+					</div>
+					<!-- /box_general -->
+					</div>
+					<!-- /step -->
+				</div>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</main>
+	<!--/main-->
+{% endblock %}

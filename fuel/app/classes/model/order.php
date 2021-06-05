@@ -98,7 +98,7 @@ class Model_Order extends \Orm\Model
 		),
 	);
 
-	protected static $_table_name = 'brands';
+	protected static $_table_name = 'orders';
 
 	protected static $_primary_key = array('id');
 

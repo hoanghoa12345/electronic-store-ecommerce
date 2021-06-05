@@ -15,6 +15,10 @@ class Model_Brand extends \Orm\Model
 			"label" => "Slug",
 			"data_type" => "varchar",
 		),
+		"image" => array(
+			"label" => "Slug",
+			"data_type" => "varchar",
+		),
 		"created_at" => array(
 			"label" => "Created at",
 			"data_type" => "int",

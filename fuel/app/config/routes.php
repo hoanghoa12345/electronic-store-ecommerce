@@ -27,8 +27,9 @@ return array(
 	 *
 	 */
 
-	'_404_' => 'error/404',
 	'_403_' => 'error/403',
+	'_404_' => 'error/404',
+	'_500_' => 'error/500',
 
 	/**
 	 * -------------------------------------------------------------------------
@@ -40,7 +41,9 @@ return array(
 	 */
 
 	'hello(/:name)?' => array('welcome/hello', 'name' => 'hello'),
-	'p(/:name)?' => array('product/detail', 'name'=>'product'),
-	'category/(:name)' => array('category/index', 'name'=>'category'),
-	'category/(:category)/(:child)' => 'category/child/$1/$2',
+	'products(/:name)?' => array('product/detail', 'name'=>'products'),
+	'category/(:slug)(/:child)' => array('category/child', 'name'=>'category'),
+	'category/(:slug)' => array('category/index', 'name' => 'child_category'),
+	'post(/:name)' => array('blog/detail', 'name' => 'post'),
+	'login' => 'user/login',
 );

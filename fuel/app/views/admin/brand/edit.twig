@@ -1,0 +1,36 @@
+{% extends 'admin/layouts/base.twig' %}
+{% block content %}
+<section class="content">
+   <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        {{title}}
+        <small>advanced tables</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="/admin/brand/index">{{subtitle}}</li>
+      </ol>
+    </section>
+   <div class="row">
+        <div class="col-xs-12">
+          <form action="" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="brand_name">Tên brand *</label>
+                <input type="text" class="form-control" name="brand_name" id="brand_name" placeholder="Nhập brand name" value="{{brand.name}}" required>
+              </div>
+              <div class="form-group">
+                <label for="brand_slug">Slug brand *</label>
+                <input type="text" class="form-control" name="brand_slug" id="brand_slug" value="{{brand.slug}}">
+              </div>
+              <div class="form-group">
+                <label for="brand_image">Image brand *</label>
+                <input type="file" name="image" id="image" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+    <!-- /.row -->
+</section>
+{% endblock %}
