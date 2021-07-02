@@ -126,4 +126,28 @@ class MyUploadFile
     }
     return $brand_image;
   }
+
+  public static function blog()
+  {
+		$folder = Date::forge(time())->format("%m_%Y", true);
+		$config = array(
+			'path' => DOCROOT.'files'.DS.$folder.DS.'blogs',
+			'randomize' => true,
+			'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png'),
+    );
+    
+    Upload::process($config);
+    $blog_image = array();
+    if (Upload::is_valid())
+    {
+      Upload::save();
+      foreach(Upload::get_files() as $file)
+      {
+        $image_path = '/files/'.$folder.'/blogs/'.$file['saved_as'];
+        array_push($blog_image,$image_path);
+      }
+
+    }
+    return $blog_image;
+  }
 }

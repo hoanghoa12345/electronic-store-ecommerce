@@ -25,6 +25,12 @@ class Twig_Fuel_Extension extends \Parser\Twig_Fuel_Extension
                 new Twig\TwigFunction('is_admin', function (){
                     return isAdmin();
                 }),
+                new Twig\TwigFunction('current_url', function (){
+                    return currentUrl();
+                }),
+                new Twig\TwigFunction('ellipsis_str', function ($str){
+                    return ellipsisStr($str);
+                }),
             ]
         );
     }

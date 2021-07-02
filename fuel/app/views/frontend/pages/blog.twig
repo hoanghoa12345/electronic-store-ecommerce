@@ -13,10 +13,10 @@
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Category</a></li>
-						<li>Page active</li>
+						<li>Tin tức</li>
 					</ul>
 				</div>
-				<h1>Allaia Blog &amp; News</h1>
+				<h1>Tin tức</h1>
 			</div>
 			<!-- /page_header -->
 			<div class="row">
@@ -29,138 +29,30 @@
 					</div>
 					<!-- /widget -->
 					<div class="row">
+					{% for post in posts %}					
 						<div class="col-md-6">
 							<article class="blog">
 								<figure>
-									<a href="blog-post.html"><img src="img/blog-1.jpg" alt="">
+									<a href="/posts/{{post.slug}}"><img src="{{post.photo}}" alt="">
 										<div class="preview"><span>Read more</span></div>
 									</a>
 								</figure>
 								<div class="post_info">
-									<small>Category - 20 Nov. 2017</small>
-									<h2><a href="blog-post.html">Ea exerci option hendrerit</a></h2>
-									<p>Quodsi sanctus pro eu, ne audire scripserit quo. Vel an enim offendit salutandi, in eos quod omnes epicurei, ex veri qualisque scriptorem mei.</p>
+									<small>{{post.post_cat_id}} - {{post.created_at}}</small>
+									<h2><a href="/posts/{{post.slug}}">{{post.title}}</a></h2>
+									<p>{{post.summary}}</p>
 									<ul>
 										<li>
-											<div class="thumb"><img src="img/avatar.jpg" alt=""></div> Admin
+											<div class="thumb"><img src="img/avatar.jpg" alt=""></div> {{post.added_by}}
 										</li>
-										<li><i class="ti-comment"></i>20</li>
+										<li><i class="ti-comment"></i>0</li>
 									</ul>
 								</div>
 							</article>
 							<!-- /article -->
 						</div>
 						<!-- /col -->
-						<div class="col-md-6">
-							<article class="blog">
-								<figure>
-									<a href="blog-post.html"><img src="img/blog-2.jpg" alt="">
-										<div class="preview"><span>Read more</span></div>
-									</a>
-								</figure>
-								<div class="post_info">
-									<small>Category - 20 Nov. 2017</small>
-									<h2><a href="blog-post.html">At usu sale dolorum offendit</a></h2>
-									<p>Quodsi sanctus pro eu, ne audire scripserit quo. Vel an enim offendit salutandi, in eos quod omnes epicurei, ex veri qualisque scriptorem mei.</p>
-									<ul>
-										<li>
-											<div class="thumb"><img src="img/avatar.jpg" alt=""></div> Admin
-										</li>
-										<li><i class="ti-comment"></i>20</li>
-									</ul>
-								</div>
-							</article>
-							<!-- /article -->
-						</div>
-						<!-- /col -->
-						<div class="col-md-6">
-							<article class="blog">
-								<figure>
-									<a href="blog-post.html"><img src="img/blog-3.jpg" alt="">
-										<div class="preview"><span>Read more</span></div>
-									</a>
-								</figure>
-								<div class="post_info">
-									<small>Category - 20 Nov. 2017</small>
-									<h2><a href="blog-post.html">Iusto nominavi petentium in</a></h2>
-									<p>Quodsi sanctus pro eu, ne audire scripserit quo. Vel an enim offendit salutandi, in eos quod omnes epicurei, ex veri qualisque scriptorem mei.</p>
-									<ul>
-										<li>
-											<div class="thumb"><img src="img/avatar.jpg" alt=""></div> Admin
-										</li>
-										<li><i class="ti-comment"></i>20</li>
-									</ul>
-								</div>
-							</article>
-							<!-- /article -->
-						</div>
-						<!-- /col -->
-						<div class="col-md-6">
-							<article class="blog">
-								<figure>
-									<a href="blog-post.html"><img src="img/blog-4.jpg" alt="">
-										<div class="preview"><span>Read more</span></div>
-									</a>
-								</figure>
-								<div class="post_info">
-									<small>Category - 20 Nov. 2017</small>
-									<h2><a href="blog-post.html">Assueverit concludaturque quo</a></h2>
-									<p>Quodsi sanctus pro eu, ne audire scripserit quo. Vel an enim offendit salutandi, in eos quod omnes epicurei, ex veri qualisque scriptorem mei.</p>
-									<ul>
-										<li>
-											<div class="thumb"><img src="img/avatar.jpg" alt=""></div> Admin
-										</li>
-										<li><i class="ti-comment"></i>20</li>
-									</ul>
-								</div>
-							</article>
-							<!-- /article -->
-						</div>
-						<!-- /col -->
-						<div class="col-md-6">
-							<article class="blog">
-								<figure>
-									<a href="blog-post.html"><img src="img/blog-5.jpg" alt="">
-										<div class="preview"><span>Read more</span></div>
-									</a>
-								</figure>
-								<div class="post_info">
-									<small>Category - 20 Nov. 2017</small>
-									<h2><a href="blog-post.html">Nec nihil menandri appellantur</a></h2>
-									<p>Quodsi sanctus pro eu, ne audire scripserit quo. Vel an enim offendit salutandi, in eos quod omnes epicurei, ex veri qualisque scriptorem mei.</p>
-									<ul>
-										<li>
-											<div class="thumb"><img src="img/avatar.jpg" alt=""></div> Admin
-										</li>
-										<li><i class="ti-comment"></i>20</li>
-									</ul>
-								</div>
-							</article>
-							<!-- /article -->
-						</div>
-						<!-- /col -->
-						<div class="col-md-6">
-							<article class="blog">
-								<figure>
-									<a href="blog-post.html"><img src="img/blog-6.jpg" alt="">
-										<div class="preview"><span>Read more</span></div>
-									</a>
-								</figure>
-								<div class="post_info">
-									<small>Category - 20 Nov. 2017</small>
-									<h2><a href="blog-post.html">Te congue everti his salutandi</a></h2>
-									<p>Quodsi sanctus pro eu, ne audire scripserit quo. Vel an enim offendit salutandi, in eos quod omnes epicurei, ex veri qualisque scriptorem mei.</p>
-									<ul>
-										<li>
-											<div class="thumb"><img src="img/avatar.jpg" alt=""></div> Admin
-										</li>
-										<li><i class="ti-comment"></i>20</li>
-									</ul>
-								</div>
-							</article>
-							<!-- /article -->
-						</div>
-						<!-- /col -->
+						{% endfor %}
 					</div>
 					<!-- /row -->
 
@@ -200,27 +92,15 @@
 							<h4>Latest Post</h4>
 						</div>
 						<ul class="comments-list">
+							{% for post in last_posts %}
 							<li>
 								<div class="alignleft">
-									<a href="#0"><img src="img/blog-5.jpg" alt=""></a>
+									<a href="/posts/{{post.slug}}"><img src="{{post.photo}}" alt=""></a>
 								</div>
-								<small>Category - 11.08.2016</small>
-								<h3><a href="#" title="">Verear qualisque ex minimum...</a></h3>
+								<small>{{post.post_cat_id}} - {{post.created_at}}</small>
+								<h3><a href="/posts/{{post.slug}}" title="">{{ellipsis_str(post.title)}}</a></h3>
 							</li>
-							<li>
-								<div class="alignleft">
-									<a href="#0"><img src="img/blog-6.jpg" alt=""></a>
-								</div>
-								<small>Category - 11.08.2016</small>
-								<h3><a href="#" title="">Verear qualisque ex minimum...</a></h3>
-							</li>
-							<li>
-								<div class="alignleft">
-									<a href="#0"><img src="img/blog-4.jpg" alt=""></a>
-								</div>
-								<small>Category - 11.08.2016</small>
-								<h3><a href="#" title="">Verear qualisque ex minimum...</a></h3>
-							</li>
+							{% endfor %}
 						</ul>
 					</div>
 					<!-- /widget -->

@@ -4,6 +4,34 @@
 {% endblock %}
 {% block javascript %}
 <script>
+		function getCommune(idDistrict)
+		{
+		///checkout/getprovince/getCommune?idDistrict=001
+			$.ajax({
+				url:"/checkout/getprovince/getCommune?idDistrict=" + idDistrict,
+				type:"GET",
+				success:function(response){
+					$("#commune").html(response)
+					$("#commune").prepend("<option selected>--Chọn xã/phường/thị trấn--</option>")
+					$("#commune").niceSelect('update')
+				}
+			})
+		}
+
+		function getDistrict(idProvince)
+		{
+		///checkout/getprovince/getDistrict?idProvince=01
+			$.ajax({
+				url:"/checkout/getprovince/getDistrict?idProvince=" + idProvince,
+				type:"GET",
+				success:function(response){
+					$("#district").html(response)
+					$("#district").prepend("<option selected>--Chọn huyện/quận--</option>")
+					$("#district").niceSelect('update')
+				}
+			})
+		}
+
     	// Other address Panel
 		$('#other_addr input').on("change", function (){
 	        if(this.checked)
@@ -11,6 +39,29 @@
 	        else
 	            $('#other_addr_c').fadeOut('fast');
 	    });
+		$(document).ready(function() {
+			//http://electrostore.xyz/checkout/getprovince/getAllProvince
+			$.ajax({
+				url:"/checkout/getprovince/getAllProvince",
+				type:"GET",
+				success:function(response){
+					$("#province").html(response)
+					$("#province").prepend("<option selected>--Chọn tỉnh/thành phố--</option>")
+					$("#province").niceSelect('update')
+				}
+			})
+			$('#province').change(function (){
+				getDistrict($(this).children("option:selected").val())
+			})
+			$('#district').change(function (){
+				getCommune($(this).children("option:selected").val())
+			})
+			$('#commune').change(function (){
+				var address = $('#commune option:selected').text() +', '+ $("#district option:selected").text() +', '+ $("#province option:selected").text()
+				
+				$("#address").val(address)
+			})
+		})
 	</script>
 {% endblock %}
 {% block content %}
@@ -30,6 +81,7 @@
 			
 	</div>
 	<!-- /page_header -->
+			<form action="/checkout/confirm" method="post">
 			<div class="row">
 				<div class="col-lg-4 col-md-6">
 					<div class="step first">
@@ -38,44 +90,48 @@
 						<p>Email: {{user.email}}</p>
 						<p>Số điện thoại: {{user.phone_number}}</p>
 						<p>Địa chỉ: {{user.address}}</p>
-					<form action="" method="post">
 							<hr>
 							<div class="row no-gutters">
 								<div class="col-6 form-group pr-1">
-									<input type="text" class="form-control" placeholder="Name">
+									<input type="text" class="form-control" name="first_name" placeholder="Name" value="{{user.firstname}}">
 								</div>
 								<div class="col-6 form-group pl-1">
-									<input type="text" class="form-control" placeholder="Last Name">
+									<input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{user.lastname}}">
 								</div>
 							</div>
 							<!-- /row -->
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Full Address">
+								<input type="text" class="form-control" id="address" name="address" placeholder="Full Address" value="{{user.address}}">
 							</div>
 							<div class="row no-gutters">
 								<div class="col-6 form-group pr-1">
-									<input type="text" class="form-control" placeholder="City">
+									<div class="custom-select-form">
+										<select class="wide" name="province" id="province" class="form-control">
+											<option selected>--Chọn tỉnh/thành phố--</option>
+										</select>
+									</div>
 								</div>
 								<div class="col-6 form-group pl-1">
-									<input type="text" class="form-control" placeholder="Postal code">
+									<div class="custom-select-form">
+										<select class="wide" name="district" id="district" class="form-control">
+											<option selected>--Chọn huyện/quận--</option>
+										</select>
+									</div>
 								</div>
 							</div>
 							<!-- /row -->
 							<div class="row no-gutters">
 								<div class="col-md-12 form-group">
 									<div class="custom-select-form">
-										<select class="wide add_bottom_15" name="country" id="country">
-											<option value="" selected>Country</option>
-											<option value="Europe">Europe</option>
-											<option value="United states">United states</option>
-											<option value="Asia">Asia</option>
+										<select class="wide add_bottom_15" name="commune" id="commune">
+											<option selected>--Chọn xã/phường/thị trấn--</option>
 										</select>
 									</div>
 								</div>
 							</div>
 							<!-- /row -->
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Telephone">
+								<input type="text" class="form-control" name="phone_number" placeholder="Telephone" value="{{user.phone_number}}">
 							</div>
 							<hr>
 							<div class="form-group">
@@ -87,45 +143,42 @@
 							<div id="other_addr_c" class="pt-2">
 							<div class="row no-gutters">
 								<div class="col-6 form-group pr-1">
-									<input type="text" class="form-control" placeholder="Name">
+									<input type="text" class="form-control" name="other_first_name" placeholder="Name">
 								</div>
 								<div class="col-6 form-group pl-1">
-									<input type="text" class="form-control" placeholder="Last Name">
+									<input type="text" class="form-control" name="other_last_name" placeholder="Last Name">
 								</div>
 							</div>
 							<!-- /row -->
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Full Address">
+								<input type="text" class="form-control" name="other_address" placeholder="Full Address">
 							</div>
 							<div class="row no-gutters">
 								<div class="col-6 form-group pr-1">
-									<input type="text" class="form-control" placeholder="City">
+									<input type="text" class="form-control" name="other_city" placeholder="City">
 								</div>
 								<div class="col-6 form-group pl-1">
-									<input type="text" class="form-control" placeholder="Postal code">
+									<input type="text" class="form-control" name="other_postal_code" placeholder="Postal code">
 								</div>
 							</div>
 							<!-- /row -->
 							<div class="row no-gutters">
 								<div class="col-md-12 form-group">
 									<div class="custom-select-form">
-										<select class="wide add_bottom_15" name="country" id="country_2">
+										<select class="wide add_bottom_15" name="other_country" id="country_2">
 											<option value="" selected>Country</option>
-											<option value="Europe">Europe</option>
-											<option value="United states">United states</option>
-											<option value="Asia">Asia</option>
+											<option value="VietNam">Việt Nam</option>
 										</select>
 									</div>
 								</div>
 							</div>
 							<!-- /row -->
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Telephone">
+								<input type="text" class="form-control" name="other_phone_number" placeholder="Telephone">
 							</div>
 							</div>
 							<!-- /other_addr_c -->
 							<hr>
-							</form>
 					</div>
 					<!-- /step -->
 				</div>
@@ -135,25 +188,25 @@
 							<ul>
 								<li>
 									<label class="container_radio">Credit Card<a href="#0" class="info" data-toggle="modal" data-target="#payments_method"></a>
-										<input type="radio" name="payment" checked>
+										<input type="radio" name="payment" value="creditcard" checked>
 										<span class="checkmark"></span>
 									</label>
 								</li>
 								<li>
 									<label class="container_radio">Paypal<a href="#0" class="info" data-toggle="modal" data-target="#payments_method"></a>
-										<input type="radio" name="payment">
+										<input type="radio" name="payment" value="paypal">
 										<span class="checkmark"></span>
 									</label>
 								</li>
 								<li>
 									<label class="container_radio">Cash on delivery<a href="#0" class="info" data-toggle="modal" data-target="#payments_method"></a>
-										<input type="radio" name="payment">
+										<input type="radio" name="payment" value="cod">
 										<span class="checkmark"></span>
 									</label>
 								</li>
 								<li>
 									<label class="container_radio">Bank Transfer<a href="#0" class="info" data-toggle="modal" data-target="#payments_method"></a>
-										<input type="radio" name="payment">
+										<input type="radio" name="payment" value="bankcard">
 										<span class="checkmark"></span>
 									</label>
 								</li>
@@ -166,13 +219,13 @@
 							<ul>
 								<li>
 									<label class="container_radio">Standard shipping<a href="#0" class="info" data-toggle="modal" data-target="#payments_method"></a>
-										<input type="radio" name="shipping" checked>
+										<input type="radio" name="shipping" value="1" checked>
 										<span class="checkmark"></span>
 									</label>
 								</li>
 								<li>
 									<label class="container_radio">Express shipping<a href="#0" class="info" data-toggle="modal" data-target="#payments_method"></a>
-										<input type="radio" name="shipping">
+										<input type="radio" name="shipping" value="2">
 										<span class="checkmark"></span>
 									</label>
 								</li>
@@ -204,7 +257,7 @@
 								</label>
 							</div>
 						
-						<a href="/checkout/confirm" class="btn_1 full-width">Confirm and Pay</a>
+						<button type="submit" class="btn_1 full-width">Confirm and Pay</button>
 					</div>
 					<!-- /box_general -->
 					</div>
@@ -212,6 +265,7 @@
 				</div>
 			</div>
 			<!-- /row -->
+			</form>
 		</div>
 		<!-- /container -->
 	</main>

@@ -64,7 +64,8 @@
                 	<td>{{user.email}}</td>
                 	<td>{{user.created_date}}</td>
                 	<td>{{user.group_id}}</td>
-                	<td>{{asset_img(user.avatar,{'class':'img-circle','width':'45'})}}</td>
+                  <td><img src="{{user.avatar}}" class="img-circle" width="45" alt="User Avatar"></td>
+                	{#<td>{{asset_img(user.avatar,{'class':'img-circle','width':'45'})}}</td>#}
                 	<td>
                 		<a href="" class="btn btn-primary btn-xs">Xem</a>
                 		<a href="" class="btn btn-warning btn-xs">Sửa</a>

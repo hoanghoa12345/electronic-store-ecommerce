@@ -17,18 +17,6 @@
   $(function () {
     $('#example1').DataTable()
   })
-  $(document).on("click", ".deleteCategory", function (e) {
-
-    e.preventDefault();
-
-    var _self = $(this);
-    var baseUrl = "{{base_url()}}";
-
-    var categoryId = _self.data('id');
-    $("#deleteBtn").attr("href",baseUrl + "admin/category/delete/" + categoryId);
-
-    $(_self.attr('href')).modal('show');
-  });
 </script>
 {% endblock %}
 {% block content %}
@@ -72,17 +60,17 @@
                 <tr>
                   <td>{{ item.order_number }}</td>
                   <td>{{ item.user_id }}</td>
-                  <td>{{ item.sub_total }}</td>
+                  <td>{{ vndFormater(item.sub_total) }}</td>
                   <td>{{ item.shipping_id }}</td>
-                  <td>{{ item.total_amount }}</td>
+                  <td>{{ vndFormater(item.total_amount) }}</td>
                   <td>{{ item.quantity }}</td>
                   <td>{{ item.payment_method }}</td>
                   <td>{{ item.status }}</td>
                   <td>
                     <div>
-                      <a href="{{base_url()}}admin/childcategory/view/{{category.id}}" class="btn btn-primary btn-xs">Xem</a>
-                      <a href="{{base_url()}}admin/category/edit/{{category.id}}" class="btn btn-warning btn-xs">Sửa</a>
-                      <a href="javascript:void(0)" class="deleteCategory btn btn-danger btn-xs" data-id="{{category.id}}" data-toggle="modal" data-target="#modal-delete">Xóa</a>
+                      <a href="" class="btn btn-primary btn-xs">Xem</a>
+                      <a href="" class="btn btn-warning btn-xs">Sửa</a>
+                      <a href="javascript:void(0)" class="btn btn-danger btn-xs" >Xóa</a>
                     </div>
                   </td>
                 </tr>

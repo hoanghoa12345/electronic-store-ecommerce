@@ -15,7 +15,6 @@ abstract class Controller_Base extends Controller {
     }
     $cart_num_items = Cart::num_items();
 
-
     $cart_items = Cart::items();
     $cart_arr = array();
     

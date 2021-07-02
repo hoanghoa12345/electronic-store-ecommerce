@@ -3,6 +3,7 @@
 use Fuel\Core\Debug;
 use Fuel\Core\Uri;
 use Auth\Auth;
+use Fuel\Core\Request;
 
 if(!function_exists('isActive')) {
   function isActive($routeName)
@@ -27,4 +28,14 @@ function to_slug($str) {
   $str = preg_replace('/[^a-z0-9-\s]/', '', $str);
   $str = preg_replace('/([\s]+)/', '-', $str);
   return $str;
+}
+
+function currentUrl()
+{
+  return Uri::string();
+}
+
+function ellipsisStr($str)
+{
+  return mb_strimwidth($str,0,42,'...');
 }

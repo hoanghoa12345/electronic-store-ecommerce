@@ -125,7 +125,7 @@ class Controller_Cart extends Controller_Base
   public function action_remove($rowid)
   {
     Cart::remove($rowid);
-    Response::redirect('cart/index');
+    Response::redirect( $_GET['returnto']);
   }
 
   public function action_info()

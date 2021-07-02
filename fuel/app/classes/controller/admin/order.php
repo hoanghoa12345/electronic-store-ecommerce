@@ -8,6 +8,7 @@ class Controller_Admin_Order extends Controller_Admin
 		$view = View::forge('admin/orders/manager.twig');
 		$view->title = 'Quản lý đơn hàng';
 		$view->subtitle = 'Đơn hàng';
+		$view->orders = Model_Order::find('all');
 		return Response::forge($view);
 	}
 

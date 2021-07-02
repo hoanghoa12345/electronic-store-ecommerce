@@ -44,6 +44,6 @@ return array(
 	'products(/:name)?' => array('product/detail', 'name'=>'products'),
 	'category/(:slug)(/:child)' => array('category/child', 'name'=>'category'),
 	'category/(:slug)' => array('category/index', 'name' => 'child_category'),
-	'post(/:name)' => array('blog/detail', 'name' => 'post'),
+	'posts(/:name)' => array('blog/detail', 'name' => 'post'),
 	'login' => 'user/login',
 );
